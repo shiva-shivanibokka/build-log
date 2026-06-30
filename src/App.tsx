@@ -1,12 +1,8 @@
-import { useState } from 'react'
 import { useTracker } from './lib/store'
 import ProjectsView from './components/ProjectsView'
 
-type Tab = 'projects' | 'leetcode'
-
 export default function App() {
   const tracker = useTracker()
-  const [tab, setTab] = useState<Tab>('projects')
 
   const synced = tracker.generatedAt
     ? new Date(tracker.generatedAt).toLocaleDateString(undefined, {
@@ -22,10 +18,10 @@ export default function App() {
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <h1 className="bg-gradient-to-r from-accent-purple via-accent-blue to-accent-green bg-clip-text text-[clamp(26px,4vw,40px)] font-extrabold leading-none tracking-tight text-transparent">
-              Mission Control 🚀
+              Build Log 🚀
             </h1>
             <p className="mt-2 text-[13.5px] text-subtle">
-              Auto-synced from GitHub — descriptions & tech fill themselves; you just set the dropdowns.
+              Auto-synced from GitHub — descriptions &amp; tech fill themselves; you just set the dropdowns.
             </p>
           </div>
 
@@ -49,20 +45,7 @@ export default function App() {
             </button>
           </div>
         </div>
-
-        {/* tabs */}
-        <nav className="mt-6 flex items-center gap-1 border-b border-line">
-          <TabButton active={tab === 'projects'} onClick={() => setTab('projects')}>
-            Projects
-          </TabButton>
-          <button
-            disabled
-            className="cursor-not-allowed px-4 py-2.5 text-[14px] font-semibold text-faint/70"
-            title="Coming next"
-          >
-            LeetCode <span className="ml-1 rounded bg-slate-100 px-1.5 py-0.5 text-[10px] font-bold uppercase text-faint">soon</span>
-          </button>
-        </nav>
+        <div className="mt-6 border-b border-line" />
       </header>
 
       <main className="mx-auto max-w-7xl px-5 py-7 sm:px-8">
@@ -83,33 +66,12 @@ export default function App() {
           </div>
         )}
 
-        {!tracker.loading && !tracker.error && tab === 'projects' && <ProjectsView tracker={tracker} />}
+        {!tracker.loading && !tracker.error && <ProjectsView tracker={tracker} />}
       </main>
 
       <footer className="mx-auto max-w-7xl px-5 pb-10 pt-4 text-center text-[11.5px] text-faint sm:px-8">
         New repo on GitHub? It appears here automatically on the next sync (each deploy, weekly, or a manual run).
       </footer>
     </div>
-  )
-}
-
-function TabButton({
-  active,
-  onClick,
-  children,
-}: {
-  active: boolean
-  onClick: () => void
-  children: React.ReactNode
-}) {
-  return (
-    <button
-      onClick={onClick}
-      className={`-mb-px border-b-2 px-4 py-2.5 text-[14px] font-semibold transition ${
-        active ? 'border-accent-purple text-ink' : 'border-transparent text-subtle hover:text-ink'
-      }`}
-    >
-      {children}
-    </button>
   )
 }

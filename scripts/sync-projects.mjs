@@ -21,8 +21,8 @@ const TOKEN = process.env.GITHUB_TOKEN || process.env.GH_TOKEN || ''
 const BASIC = args.includes('--basic') // skip all per-repo enrichment
 const FULL = !!TOKEN && !BASIC // readme + manifests (call-heavy)
 
-// Repos to never show (profile readme repo, this tracker itself, throwaways).
-const IGNORE = new Set(['shiva-shivanibokka', 'mission-control'])
+// Repos to never show (profile readme repo, the tracker repos themselves).
+const IGNORE = new Set(['shiva-shivanibokka', 'build-log', 'dsa-dojo', 'mission-control'])
 
 const headers = {
   Accept: 'application/vnd.github+json',

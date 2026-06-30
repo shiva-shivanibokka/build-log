@@ -1,4 +1,4 @@
-# Mission Control 🚀
+# Build Log 🚀
 
 A personal dashboard that tracks my projects. Every project's **name, description, and
 tech stack are pulled automatically from GitHub** — I only set four dropdowns
@@ -7,6 +7,8 @@ shows up here on the next sync; nothing is typed in by hand.
 
 > Light, colorful board. Color legend: 🟢 Done / Yes · 🔴 No / Yet to start ·
 > 🟡 Pending · 🟣 In-progress.
+
+> LeetCode practice lives in a separate repo (**DSA Dojo**), not here.
 
 ## How it works
 
@@ -59,7 +61,7 @@ GITHUB_TOKEN=ghp_xxx npm run sync
 ## Deploy
 
 Push to `main`. The `Build & Deploy` workflow runs the sync, builds, and publishes to
-GitHub Pages at `https://shiva-shivanibokka.github.io/mission-control/`. Use the
+GitHub Pages at `https://shiva-shivanibokka.github.io/build-log/`. Use the
 **Run workflow** button on the Actions tab to force a re-sync when you just pushed a
 new repo and want it to appear immediately.
 
@@ -73,10 +75,8 @@ public/
   projects.json       # generated (auto data)
   overrides.json      # committed dropdown baseline (manual data)
 src/
-  App.tsx             # layout, tabs, export bar
+  App.tsx             # layout + export bar
   components/         # ProjectsView, ProjectCard, Pill, TechStack
   lib/store.ts        # load + merge + localStorage + export
   lib/dropdowns.ts    # dropdown definitions + colors
 ```
-
-The **LeetCode** tab is a placeholder for the next page.
