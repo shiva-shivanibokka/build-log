@@ -1,0 +1,28 @@
+{
+  "name": "mission-control",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Personal dashboard that auto-syncs project repos from GitHub; you only set the status dropdowns.",
+  "scripts": {
+    "sync": "node scripts/sync-projects.mjs",
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "lint": "tsc -b --noEmit"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.11"
+  }
+}
