@@ -71,7 +71,7 @@ export default function DomainSelect({
         type="button"
         onClick={toggle}
         aria-label="Domain"
-        className="inline-flex w-full items-center gap-1.5 rounded-full px-2.5 py-1 text-[12px] font-semibold ring-1 transition"
+        className="inline-flex w-full items-center gap-1.5 rounded-full px-2.5 py-1.5 text-[13.5px] font-semibold ring-1 transition"
         style={
           rgb
             ? { background: `rgba(${rgb},0.15)`, color: `rgb(${rgb})`, boxShadow: `inset 0 0 0 1px rgba(${rgb},0.35)` }
@@ -96,7 +96,7 @@ export default function DomainSelect({
             <li>
               <button
                 onClick={() => choose(undefined)}
-                className="flex w-full items-center gap-2 rounded-lg px-2.5 py-1.5 text-[12.5px] text-faint transition hover:bg-white/[0.07]"
+                className="flex w-full items-center gap-2 rounded-lg px-2.5 py-1.5 text-[13.5px] text-faint transition hover:bg-white/[0.07]"
               >
                 <span className="h-2 w-2 rounded-full bg-slate-600" /> None
               </button>
@@ -105,7 +105,7 @@ export default function DomainSelect({
               <li key={d}>
                 <button
                   onClick={() => choose(d)}
-                  className={`flex w-full items-center gap-2 rounded-lg px-2.5 py-1.5 text-[12.5px] font-medium transition hover:bg-white/[0.07] ${
+                  className={`flex w-full items-center gap-2 rounded-lg px-2.5 py-1.5 text-[13.5px] font-medium transition hover:bg-white/[0.07] ${
                     value === d ? 'text-ink' : 'text-subtle'
                   }`}
                 >

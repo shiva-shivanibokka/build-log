@@ -31,12 +31,12 @@ export default function App() {
             <h1 className="inline-block bg-gradient-to-r from-accent-purple via-accent-blue to-accent-green bg-clip-text pb-1.5 font-display text-[clamp(26px,4vw,44px)] font-black leading-[1.2] tracking-wide text-transparent [filter:drop-shadow(0_0_18px_rgba(129,140,248,0.45))]">
               Build Log <span className="[-webkit-text-fill-color:initial] [filter:none]">🚀</span>
             </h1>
-            <p className="mt-2 font-mono text-[15px] tracking-wide text-accent-cyan/90">Build. Ship. Log.</p>
+            <p className="mt-2 font-mono text-[16px] tracking-wide text-accent-cyan/90">Build. Ship. Log.</p>
           </div>
 
           <div className="flex items-center gap-3">
             {tab === 'projects' && (
-              <div className="text-right text-[11.5px] leading-tight text-faint">
+              <div className="text-right text-[12.5px] leading-tight text-faint">
                 {synced ? <>Synced {synced}</> : 'Loading…'}
                 <br />
                 <span className="text-faint/80">{tracker.projects.length || ''} repos</span>
@@ -83,7 +83,7 @@ export default function App() {
         </nav>
       </header>
 
-      <main className="mx-auto max-w-7xl px-5 py-7 sm:px-8">
+      <main className="mx-auto max-w-7xl px-5 pb-2 pt-7 sm:px-8">
         {tab === 'projects' ? (
           <>
             {tracker.dirtyCount > 0 && (
@@ -114,7 +114,7 @@ export default function App() {
         )}
       </main>
 
-      <footer className="mx-auto max-w-7xl px-5 pb-10 pt-4 text-center text-[12.5px] text-faint sm:px-8">
+      <footer className="mx-auto max-w-7xl px-5 pb-10 pt-1 text-center text-[13.5px] text-faint sm:px-8">
         {tab === 'projects'
           ? 'New repo on GitHub? It appears here automatically on the next sync (each deploy, weekly, or a manual run).'
           : 'Project ideas you want to build.'}

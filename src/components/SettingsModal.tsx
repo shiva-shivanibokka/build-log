@@ -121,7 +121,7 @@ export function SyncBadge({ state, onManual }: { state: string; onManual?: () =>
   }
   const s = map[state] || map.idle
   return (
-    <button onClick={onManual} className={`text-[11.5px] font-semibold transition hover:opacity-80 ${s.cls}`} title="Sync now">
+    <button onClick={onManual} className={`text-[12.5px] font-semibold transition hover:opacity-80 ${s.cls}`} title="Sync now">
       {s.text}
     </button>
   )

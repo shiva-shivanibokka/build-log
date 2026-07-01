@@ -162,7 +162,7 @@ export default function TodoView({ tokenOn }: { tokenOn: boolean }) {
         <div className="overflow-x-auto rounded-2xl border border-white/10 bg-white/[0.03] shadow-card backdrop-blur-md">
           <table className="w-full min-w-[1120px] border-collapse text-left">
             <thead>
-              <tr className="border-b border-white/10 font-mono text-[11px] font-bold uppercase tracking-wide text-faint">
+              <tr className="border-b border-white/10 font-mono text-[12px] font-bold uppercase tracking-wide text-faint">
                 <Th className="w-[24%] pl-5">Idea</Th>
                 <Th>Domain</Th>
                 <Th>Priority</Th>
@@ -182,7 +182,7 @@ export default function TodoView({ tokenOn }: { tokenOn: boolean }) {
         </div>
       )}
 
-      <p className="mt-4 text-center text-[12.5px] text-faint">
+      <p className="mt-4 text-center text-[13.5px] text-faint">
         {tokenOn
           ? 'Auto-syncing to GitHub as you edit.'
           : 'Saved in this browser · enable auto-sync in ⚙, or Back up + commit todo.json.'}
@@ -197,7 +197,7 @@ function Tile({ label, value, rgb }: { label: string; value: number; rgb: string
       <div className="font-display text-[22px] font-bold leading-none" style={{ color: `rgb(${rgb})`, textShadow: `0 0 16px rgba(${rgb},0.4)` }}>
         {value}
       </div>
-      <div className="mt-1.5 text-[10.5px] font-semibold uppercase tracking-wide text-faint">{label}</div>
+      <div className="mt-1.5 text-[12px] font-semibold uppercase tracking-wide text-faint">{label}</div>
     </div>
   )
 }
@@ -217,7 +217,7 @@ function FilterGroup({
         <button
           key={v}
           onClick={() => onChange(v)}
-          className={`rounded-lg px-2.5 py-1.5 text-[12.5px] font-semibold transition ${
+          className={`rounded-lg px-2.5 py-1.5 text-[13px] font-semibold transition ${
             value === v ? 'bg-white/10 text-ink' : 'text-subtle hover:text-ink'
           }`}
         >
@@ -248,7 +248,7 @@ function Row({
             value={todo.title}
             onChange={(e) => update(todo.id, { title: e.target.value })}
             placeholder="What do you want to build?"
-            className={`w-full bg-transparent text-[14px] font-semibold text-ink placeholder:font-normal placeholder:text-faint focus:outline-none ${built ? 'line-through' : ''}`}
+            className={`w-full bg-transparent text-[14.5px] font-semibold text-ink placeholder:font-normal placeholder:text-faint focus:outline-none ${built ? 'line-through' : ''}`}
           />
           {todo.repo && (
             <a
@@ -266,7 +266,7 @@ function Row({
           value={todo.repo ?? ''}
           onChange={(e) => update(todo.id, { repo: e.target.value })}
           placeholder="+ link built repo (name)"
-          className="mt-1 w-full rounded bg-transparent px-0 text-[11px] text-faint outline-none placeholder:text-faint/60 focus:text-subtle"
+          className="mt-1 w-full rounded bg-transparent px-0 text-[12.5px] text-faint outline-none placeholder:text-faint/60 focus:text-subtle"
         />
       </td>
       <td className="px-2 py-3">
@@ -283,7 +283,7 @@ function Row({
           type="date"
           value={todo.target ?? ''}
           onChange={(e) => update(todo.id, { target: e.target.value })}
-          className={`rounded-md border border-transparent bg-transparent px-1.5 py-1 text-[12px] outline-none transition [color-scheme:dark] hover:border-white/15 focus:border-accent-cyan ${
+          className={`rounded-md border border-transparent bg-transparent px-1.5 py-1 text-[13.5px] outline-none transition [color-scheme:dark] hover:border-white/15 focus:border-accent-cyan ${
             overdue ? 'text-rose-300' : 'text-subtle'
           }`}
           title={overdue ? 'Overdue' : undefined}
@@ -323,7 +323,7 @@ function CellInput({
       value={value ?? ''}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
-      className="w-full rounded-md border border-transparent bg-transparent px-1.5 py-1 text-[12.5px] text-subtle transition placeholder:text-faint/70 hover:border-white/15 focus:border-accent-cyan focus:bg-white/5 focus:text-ink focus:outline-none"
+      className="w-full rounded-md border border-transparent bg-transparent px-1.5 py-1 text-[13.5px] text-subtle transition placeholder:text-faint/70 hover:border-white/15 focus:border-accent-cyan focus:bg-white/5 focus:text-ink focus:outline-none"
     />
   )
 }

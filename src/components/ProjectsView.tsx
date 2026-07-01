@@ -68,7 +68,7 @@ export default function ProjectsView({ tracker }: { tracker: Tracker }) {
 
       {/* status filter */}
       <div className="flex flex-wrap items-center gap-2">
-        <span className="mr-1 font-mono text-[12px] font-bold uppercase tracking-wide text-faint">Status</span>
+        <span className="mr-1 font-mono text-[13px] font-bold uppercase tracking-wide text-faint">Status</span>
         <Chip
           active={statusFilter === 'all'}
           label="All"
@@ -97,7 +97,7 @@ export default function ProjectsView({ tracker }: { tracker: Tracker }) {
 
       {/* domain filter (colours match each card's stripe/title) */}
       <div className="mt-2.5 flex flex-wrap items-center gap-2">
-        <span className="mr-1 font-mono text-[12px] font-bold uppercase tracking-wide text-faint">Domain</span>
+        <span className="mr-1 font-mono text-[13px] font-bold uppercase tracking-wide text-faint">Domain</span>
         <DomainChip active={domainFilter === 'all'} label="All" count={projects.length} rgb="148,163,184" onClick={() => setDomainFilter('all')} />
         {domains.map(([d, n]) => (
           <DomainChip
@@ -151,7 +151,7 @@ export default function ProjectsView({ tracker }: { tracker: Tracker }) {
         </div>
       )}
 
-      <p className="mt-6 text-center text-[13px] text-faint">
+      <p className="mt-4 text-center text-[14px] text-faint">
         Showing {visible.length} of {projects.length} repos
         {statusFilter !== 'all' && <> · {optionFor(STATUS_DEF, statusFilter)?.label ?? 'Unset'}</>}
         {domainFilter !== 'all' && <> · {domainFilter}</>}

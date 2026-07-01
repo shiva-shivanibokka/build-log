@@ -43,7 +43,7 @@ export default function StatStrip({ total, counts }: { total: number; counts: Re
             >
               {counts[t.key] || 0}
             </div>
-            <div className="mt-1.5 text-[10.5px] font-semibold uppercase tracking-wide text-faint">{t.label}</div>
+            <div className="mt-1.5 text-[12px] font-semibold uppercase tracking-wide text-faint">{t.label}</div>
           </div>
         ))}
       </div>
