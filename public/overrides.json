@@ -145,5 +145,17 @@
   },
   "SQL-and-Database-Skills": {
     "status": "revamp"
+  },
+  "Autonomous-Research-Report-Agent": {
+    "status": "revamp"
+  },
+  "Autonomous-ML-Pipeline-Builder": {
+    "status": "revamp"
+  },
+  "Autonomous-SWE-Agent": {
+    "status": "yet-to-start"
+  },
+  "Data-Analytics-Portfolio": {
+    "status": "yet-to-start"
   }
 }
