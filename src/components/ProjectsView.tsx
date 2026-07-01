@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import type { Tracker } from '../lib/store'
 import { DROPDOWNS, optionFor, toneDot } from '../lib/dropdowns'
+import { dominantCategory, CATEGORY_ACCENT } from '../lib/accents'
 import ProjectCard from './ProjectCard'
 import StatStrip from './StatStrip'
 
@@ -12,6 +13,7 @@ export default function ProjectsView({ tracker }: { tracker: Tracker }) {
   const { projects, get } = tracker
   const [q, setQ] = useState('')
   const [statusFilter, setStatusFilter] = useState<string>('all')
+  const [domainFilter, setDomainFilter] = useState<string>('all')
   const [sort, setSort] = useState<SortKey>('recent')
 
   // counts per status value (+ "unset") for the summary chips
@@ -25,6 +27,22 @@ export default function ProjectsView({ tracker }: { tracker: Tracker }) {
     return c
   }, [projects, get])
 
+  // each project's dominant domain (drives its card colour) + counts for the filter
+  const domainOf = useMemo(() => {
+    const m: Record<string, string> = {}
+    for (const p of projects) m[p.repo] = dominantCategory(p.tech)
+    return m
+  }, [projects])
+
+  const domains = useMemo(() => {
+    const c: Record<string, number> = {}
+    for (const p of projects) {
+      const d = domainOf[p.repo]
+      c[d] = (c[d] || 0) + 1
+    }
+    return Object.entries(c).sort((a, b) => b[1] - a[1])
+  }, [projects, domainOf])
+
   const visible = useMemo(() => {
     const needle = q.trim().toLowerCase()
     let list = projects.filter((p) => {
@@ -32,6 +50,7 @@ export default function ProjectsView({ tracker }: { tracker: Tracker }) {
         const v = get(p.repo, 'status')
         if (statusFilter === 'unset' ? v != null : v !== statusFilter) return false
       }
+      if (domainFilter !== 'all' && domainOf[p.repo] !== domainFilter) return false
       if (!needle) return true
       const hay = [p.name, p.repo, p.description, ...Object.values(p.tech || {}).flat()]
         .join(' ')
@@ -44,7 +63,7 @@ export default function ProjectsView({ tracker }: { tracker: Tracker }) {
         : (b.pushedAt || '').localeCompare(a.pushedAt || ''),
     )
     return list
-  }, [projects, q, statusFilter, sort, get])
+  }, [projects, q, statusFilter, domainFilter, domainOf, sort, get])
 
   return (
     <div>
@@ -76,6 +95,22 @@ export default function ProjectsView({ tracker }: { tracker: Tracker }) {
           dot="bg-slate-300"
           onClick={() => setStatusFilter('unset')}
         />
+      </div>
+
+      {/* domain filter (colours match each card's stripe/title) */}
+      <div className="mt-2.5 flex flex-wrap items-center gap-2">
+        <span className="mr-1 font-mono text-[10.5px] font-bold uppercase tracking-wide text-faint">Domain</span>
+        <DomainChip active={domainFilter === 'all'} label="All" rgb="148,163,184" onClick={() => setDomainFilter('all')} />
+        {domains.map(([d, n]) => (
+          <DomainChip
+            key={d}
+            active={domainFilter === d}
+            label={d}
+            count={n}
+            rgb={CATEGORY_ACCENT[d]?.rgb ?? '148,163,184'}
+            onClick={() => setDomainFilter(d)}
+          />
+        ))}
       </div>
 
       {/* search + sort */}
@@ -120,11 +155,42 @@ export default function ProjectsView({ tracker }: { tracker: Tracker }) {
 
       <p className="mt-6 text-center text-[12px] text-faint">
         Showing {visible.length} of {projects.length} repos
-        {statusFilter !== 'all' && (
-          <> · filtered by {optionFor(STATUS_DEF, statusFilter)?.label ?? 'Unset'}</>
-        )}
+        {statusFilter !== 'all' && <> · {optionFor(STATUS_DEF, statusFilter)?.label ?? 'Unset'}</>}
+        {domainFilter !== 'all' && <> · {domainFilter}</>}
       </p>
     </div>
+  )
+}
+
+function DomainChip({
+  active,
+  label,
+  count,
+  rgb,
+  onClick,
+}: {
+  active: boolean
+  label: string
+  count?: number
+  rgb: string
+  onClick: () => void
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[12px] font-semibold transition ${
+        active ? 'text-ink' : 'border-white/10 bg-white/[0.03] text-subtle hover:border-white/25 hover:text-ink'
+      }`}
+      style={
+        active
+          ? { borderColor: `rgba(${rgb},0.55)`, background: `rgba(${rgb},0.15)`, boxShadow: `0 0 14px rgba(${rgb},0.18)` }
+          : undefined
+      }
+    >
+      <span className="h-2 w-2 rounded-full" style={{ background: `rgb(${rgb})`, boxShadow: `0 0 8px rgba(${rgb},0.7)` }} />
+      {label}
+      {count != null && <span className="tabular-nums opacity-70">{count}</span>}
+    </button>
   )
 }
 

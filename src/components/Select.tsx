@@ -94,7 +94,7 @@ export default function Select({
         aria-haspopup="listbox"
         aria-expanded={open}
         onClick={toggle}
-        className={`inline-flex w-full items-center gap-1.5 rounded-full px-2.5 py-1.5 text-[12.5px] font-semibold ring-1 transition ${toneClasses[tone]}`}
+        className={`inline-flex w-full items-center gap-1.5 rounded-full px-2.5 py-1.5 text-[13px] font-semibold ring-1 transition ${toneClasses[tone]}`}
       >
         <span className={`h-2 w-2 shrink-0 rounded-full ${toneDot[tone]}`} />
         <span className="truncate">{cur ? cur.label : placeholder}</span>
@@ -116,7 +116,7 @@ export default function Select({
               <li>
                 <button
                   onClick={() => choose(undefined)}
-                  className="flex w-full items-center gap-2 rounded-lg px-2.5 py-2 text-[12.5px] text-faint transition hover:bg-white/[0.07]"
+                  className="flex w-full items-center gap-2 rounded-lg px-2.5 py-2 text-[13px] text-faint transition hover:bg-white/[0.07]"
                 >
                   <span className="h-2 w-2 rounded-full bg-slate-600" />
                   <span>None</span>
@@ -128,7 +128,7 @@ export default function Select({
               <li key={o.value}>
                 <button
                   onClick={() => choose(o.value)}
-                  className={`flex w-full items-center gap-2 rounded-lg px-2.5 py-2 text-[12.5px] font-medium transition hover:bg-white/[0.07] ${
+                  className={`flex w-full items-center gap-2 rounded-lg px-2.5 py-2 text-[13px] font-medium transition hover:bg-white/[0.07] ${
                     value === o.value ? 'text-ink' : 'text-subtle'
                   }`}
                 >

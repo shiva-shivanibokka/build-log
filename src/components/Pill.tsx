@@ -14,7 +14,7 @@ export default function Pill({
 }) {
   return (
     <label className="flex flex-col gap-1">
-      <span className="px-0.5 font-mono text-[10px] font-semibold uppercase tracking-wide text-faint">
+      <span className="px-0.5 font-mono text-[10.5px] font-semibold uppercase tracking-wide text-faint">
         {def.label}
       </span>
       <Select value={value} options={def.options} onChange={onChange} ariaLabel={def.label} placeholder="—" />
