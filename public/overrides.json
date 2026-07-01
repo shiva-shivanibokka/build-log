@@ -97,5 +97,20 @@
   },
   "Fine-Tuned-Domain-LLM-QLoRA": {
     "status": "yet-to-start"
+  },
+  "Multimodal-RAG": {
+    "status": "yet-to-start"
+  },
+  "Computer-Vision-MLOps-Pipeline": {
+    "status": "yet-to-start"
+  },
+  "RL-Portfolio-Optimization": {
+    "status": "yet-to-start"
+  },
+  "NLP-Pipeline-at-Scale": {
+    "status": "yet-to-start"
+  },
+  "Federated-Learning-Simulation": {
+    "status": "yet-to-start"
   }
 }
