@@ -1,5 +1,6 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import type { DropdownKey, Override, Overrides, Project, ProjectsFile } from '../data/types'
+import { commitJson, hasToken, type SyncState } from './github'
 
 const LS_KEY = 'mc-overrides-v1'
 const base = import.meta.env.BASE_URL
@@ -24,6 +25,15 @@ function merge(baseline: Overrides, local: Overrides): Overrides {
   return out
 }
 
+function clean(effective: Overrides): Overrides {
+  const out: Overrides = {}
+  for (const [repo, ov] of Object.entries(effective)) {
+    const entries = Object.entries(ov).filter(([, v]) => v != null && v !== '')
+    if (entries.length) out[repo] = Object.fromEntries(entries)
+  }
+  return out
+}
+
 export interface Tracker {
   loading: boolean
   error: string | null
@@ -33,6 +43,8 @@ export interface Tracker {
   set: (repo: string, key: DropdownKey, value: string | undefined) => void
   dirtyCount: number
   exportOverrides: () => void
+  syncState: SyncState
+  syncNow: () => void
 }
 
 export function useTracker(): Tracker {
@@ -42,6 +54,8 @@ export function useTracker(): Tracker {
   const [projects, setProjects] = useState<Project[]>([])
   const [baseline, setBaseline] = useState<Overrides>({})
   const [local, setLocal] = useState<Overrides>(() => readLocal())
+  const [syncState, setSyncState] = useState<SyncState>(hasToken() ? 'idle' : 'off')
+  const timer = useRef<number>()
 
   useEffect(() => {
     let cancelled = false
@@ -69,10 +83,7 @@ export function useTracker(): Tracker {
 
   const effective = useMemo(() => merge(baseline, local), [baseline, local])
 
-  const get = useCallback(
-    (repo: string, key: DropdownKey) => effective[repo]?.[key],
-    [effective],
-  )
+  const get = useCallback((repo: string, key: DropdownKey) => effective[repo]?.[key], [effective])
 
   const set = useCallback((repo: string, key: DropdownKey, value: string | undefined) => {
     setLocal((prev) => {
@@ -85,7 +96,6 @@ export function useTracker(): Tracker {
     })
   }, [])
 
-  // how many fields differ from the committed baseline (i.e. not yet exported)
   const dirtyCount = useMemo(() => {
     let n = 0
     for (const repo of Object.keys(local)) {
@@ -96,14 +106,30 @@ export function useTracker(): Tracker {
     return n
   }, [local, baseline])
 
+  const syncNow = useCallback(() => {
+    if (!hasToken()) return
+    const payload = clean(effective)
+    setSyncState('saving')
+    commitJson('public/overrides.json', payload, 'Update project statuses (Build Log)')
+      .then(() => {
+        setBaseline(payload)
+        setLocal({})
+        writeLocal({})
+        setSyncState('saved')
+      })
+      .catch(() => setSyncState('error'))
+  }, [effective])
+
+  // Debounced auto-commit whenever there are unsaved edits and a token is set.
+  useEffect(() => {
+    if (loading || !hasToken() || dirtyCount === 0) return
+    window.clearTimeout(timer.current)
+    timer.current = window.setTimeout(syncNow, 3500)
+    return () => window.clearTimeout(timer.current)
+  }, [local, dirtyCount, loading, syncNow])
+
   const exportOverrides = useCallback(() => {
-    // strip empty repo entries so the committed file stays tidy
-    const clean: Overrides = {}
-    for (const [repo, ov] of Object.entries(effective)) {
-      const entries = Object.entries(ov).filter(([, v]) => v != null && v !== '')
-      if (entries.length) clean[repo] = Object.fromEntries(entries)
-    }
-    const blob = new Blob([JSON.stringify(clean, null, 2) + '\n'], { type: 'application/json' })
+    const blob = new Blob([JSON.stringify(clean(effective), null, 2) + '\n'], { type: 'application/json' })
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
@@ -112,5 +138,5 @@ export function useTracker(): Tracker {
     URL.revokeObjectURL(url)
   }, [effective])
 
-  return { loading, error, generatedAt, projects, get, set, dirtyCount, exportOverrides }
+  return { loading, error, generatedAt, projects, get, set, dirtyCount, exportOverrides, syncState, syncNow }
 }

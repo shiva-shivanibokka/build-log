@@ -1,8 +1,10 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { commitJson, hasToken, type SyncState } from './github'
 
 // A manual "To Do" board: project ideas/tasks you want to build. Fully
 // user-entered (unlike the synced Projects board). Stored in localStorage;
-// Export writes public/todo.json, which seeds a fresh browser.
+// auto-commits to public/todo.json when a GitHub token is configured, else the
+// Export button downloads it.
 export interface Todo {
   id: string
   title: string
@@ -24,6 +26,8 @@ export interface TodosApi {
   update: (id: string, patch: Partial<Todo>) => void
   remove: (id: string) => void
   exportTodos: () => void
+  syncState: SyncState
+  syncNow: () => void
 }
 
 function newId(): string {
@@ -34,12 +38,17 @@ function newId(): string {
 export function useTodos(): TodosApi {
   const [todos, setTodos] = useState<Todo[]>([])
   const [loading, setLoading] = useState(true)
+  const [syncState, setSyncState] = useState<SyncState>(hasToken() ? 'idle' : 'off')
+  const lastSynced = useRef<string>('')
+  const timer = useRef<number>()
 
   useEffect(() => {
     const local = localStorage.getItem(LS)
     if (local) {
       try {
-        setTodos(JSON.parse(local))
+        const parsed = JSON.parse(local)
+        setTodos(parsed)
+        lastSynced.current = JSON.stringify(parsed)
         setLoading(false)
         return
       } catch {
@@ -48,7 +57,11 @@ export function useTodos(): TodosApi {
     }
     fetch(`${base}todo.json`)
       .then((r) => (r.ok ? r.json() : []))
-      .then((d) => setTodos(Array.isArray(d) ? d : []))
+      .then((d) => {
+        const arr = Array.isArray(d) ? d : []
+        setTodos(arr)
+        lastSynced.current = JSON.stringify(arr)
+      })
       .catch(() => {})
       .finally(() => setLoading(false))
   }, [])
@@ -77,6 +90,27 @@ export function useTodos(): TodosApi {
 
   const remove = useCallback((id: string) => mutate((prev) => prev.filter((t) => t.id !== id)), [mutate])
 
+  const syncNow = useCallback(() => {
+    if (!hasToken()) return
+    const snapshot = JSON.stringify(todos)
+    setSyncState('saving')
+    commitJson('public/todo.json', todos, 'Update To Do board (Build Log)')
+      .then(() => {
+        lastSynced.current = snapshot
+        setSyncState('saved')
+      })
+      .catch(() => setSyncState('error'))
+  }, [todos])
+
+  // Debounced auto-commit when todos change and a token is set.
+  useEffect(() => {
+    if (loading || !hasToken()) return
+    if (JSON.stringify(todos) === lastSynced.current) return
+    window.clearTimeout(timer.current)
+    timer.current = window.setTimeout(syncNow, 3500)
+    return () => window.clearTimeout(timer.current)
+  }, [todos, loading, syncNow])
+
   const exportTodos = useCallback(() => {
     const blob = new Blob([JSON.stringify(todos, null, 2) + '\n'], { type: 'application/json' })
     const url = URL.createObjectURL(blob)
@@ -87,5 +121,5 @@ export function useTodos(): TodosApi {
     URL.revokeObjectURL(url)
   }, [todos])
 
-  return { todos, loading, add, update, remove, exportTodos }
+  return { todos, loading, add, update, remove, exportTodos, syncState, syncNow }
 }

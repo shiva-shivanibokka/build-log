@@ -1,5 +1,6 @@
 import type { Tone } from '../lib/dropdowns'
 import Select from './Select'
+import { SyncBadge } from './SettingsModal'
 import { useTodos } from '../lib/todos'
 import type { Todo } from '../lib/todos'
 
@@ -22,9 +23,10 @@ const PRIORITY: Opt[] = [
 const primaryBtn =
   'rounded-xl bg-gradient-to-r from-accent-purple to-accent-blue px-4 py-2 text-[12.5px] font-semibold text-white shadow-glow transition hover:-translate-y-0.5 hover:shadow-pop'
 
-export default function TodoView() {
-  const { todos, add, update, remove, exportTodos } = useTodos()
+export default function TodoView({ tokenOn }: { tokenOn: boolean }) {
+  const { todos, add, update, remove, exportTodos, syncState, syncNow } = useTodos()
   const doneCount = todos.filter((t) => t.implemented === 'yes').length
+  const badgeState = syncState === 'off' && tokenOn ? 'idle' : syncState
 
   return (
     <div>
@@ -39,13 +41,18 @@ export default function TodoView() {
             </span>
           )}
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
+          <SyncBadge state={badgeState} onManual={syncNow} />
           <button
-            onClick={exportTodos}
+            onClick={tokenOn ? syncNow : exportTodos}
             className="rounded-xl border border-white/10 bg-white/[0.03] px-3.5 py-2 text-[12.5px] font-semibold text-subtle transition hover:text-ink"
-            title="Your ideas auto-save in this browser. Click to download a backup (todo.json) you can commit to keep them permanently / sync across devices."
+            title={
+              tokenOn
+                ? 'Commit your ideas to GitHub now'
+                : 'Your ideas auto-save in this browser. Download a backup (todo.json) you can commit — or enable auto-sync in ⚙ settings.'
+            }
           >
-            ⬇ Back up
+            {tokenOn ? '⬆ Save now' : '⬇ Back up'}
           </button>
           <button onClick={add} className={primaryBtn}>
             + New idea
@@ -88,7 +95,9 @@ export default function TodoView() {
       )}
 
       <p className="mt-4 text-center text-[11.5px] text-faint">
-        Saved in this browser · <b>Export</b> and commit <code>todo.json</code> to keep them / sync across devices.
+        {tokenOn
+          ? 'Auto-syncing to GitHub as you edit.'
+          : 'Saved in this browser · enable auto-sync in ⚙, or Back up + commit todo.json to keep them / sync across devices.'}
       </p>
     </div>
   )

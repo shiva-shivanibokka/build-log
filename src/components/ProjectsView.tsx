@@ -1,7 +1,8 @@
 import { useMemo, useState } from 'react'
 import type { Tracker } from '../lib/store'
-import { DROPDOWNS, optionFor } from '../lib/dropdowns'
+import { DROPDOWNS, optionFor, toneDot } from '../lib/dropdowns'
 import ProjectCard from './ProjectCard'
+import StatStrip from './StatStrip'
 
 const STATUS_DEF = DROPDOWNS.find((d) => d.key === 'status')!
 
@@ -47,6 +48,8 @@ export default function ProjectsView({ tracker }: { tracker: Tracker }) {
 
   return (
     <div>
+      <StatStrip total={projects.length} counts={counts} />
+
       {/* summary chips */}
       <div className="flex flex-wrap gap-2">
         <Chip
@@ -62,15 +65,7 @@ export default function ProjectsView({ tracker }: { tracker: Tracker }) {
             active={statusFilter === o.value}
             label={o.label}
             count={counts[o.value] ?? 0}
-            dot={
-              o.tone === 'green'
-                ? 'bg-emerald-500'
-                : o.tone === 'purple'
-                  ? 'bg-purple-500'
-                  : o.tone === 'yellow'
-                    ? 'bg-amber-500'
-                    : 'bg-rose-500'
-            }
+            dot={toneDot[o.tone]}
             onClick={() => setStatusFilter(o.value)}
           />
         ))}

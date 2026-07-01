@@ -40,7 +40,14 @@ export default function Select({
     const el = btnRef.current
     if (!el) return
     const r = el.getBoundingClientRect()
-    setPos({ top: r.bottom + 6, left: r.left, width: Math.max(r.width, 160) })
+    const rows = options.length + (includeClear ? 1 : 0)
+    const estH = rows * 36 + 10
+    // flip upward when there isn't room below (e.g. cards low in the viewport)
+    const openUp = r.bottom + estH + 8 > window.innerHeight && r.top - estH - 8 > 0
+    const width = Math.max(r.width, 160)
+    let left = r.left
+    if (left + width > window.innerWidth - 8) left = window.innerWidth - width - 8
+    setPos({ top: openUp ? r.top - estH - 6 : r.bottom + 6, left, width })
   }
 
   const toggle = () => {
