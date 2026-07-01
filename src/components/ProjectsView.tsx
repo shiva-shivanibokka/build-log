@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import type { Tracker } from '../lib/store'
 import { DROPDOWNS, optionFor, toneDot } from '../lib/dropdowns'
-import { dominantCategory, CATEGORY_ACCENT } from '../lib/accents'
+import { domainsFor, DOMAIN_COLOR } from '../lib/domains'
 import ProjectCard from './ProjectCard'
 import StatStrip from './StatStrip'
 
@@ -27,21 +27,18 @@ export default function ProjectsView({ tracker }: { tracker: Tracker }) {
     return c
   }, [projects, get])
 
-  // each project's dominant domain (drives its card colour) + counts for the filter
-  const domainOf = useMemo(() => {
-    const m: Record<string, string> = {}
-    for (const p of projects) m[p.repo] = dominantCategory(p.tech)
+  // each project's domains (multi-label) + counts for the filter
+  const domainsOf = useMemo(() => {
+    const m: Record<string, string[]> = {}
+    for (const p of projects) m[p.repo] = domainsFor(p.tech)
     return m
   }, [projects])
 
   const domains = useMemo(() => {
     const c: Record<string, number> = {}
-    for (const p of projects) {
-      const d = domainOf[p.repo]
-      c[d] = (c[d] || 0) + 1
-    }
+    for (const p of projects) for (const d of domainsOf[p.repo]) c[d] = (c[d] || 0) + 1
     return Object.entries(c).sort((a, b) => b[1] - a[1])
-  }, [projects, domainOf])
+  }, [projects, domainsOf])
 
   const visible = useMemo(() => {
     const needle = q.trim().toLowerCase()
@@ -50,7 +47,7 @@ export default function ProjectsView({ tracker }: { tracker: Tracker }) {
         const v = get(p.repo, 'status')
         if (statusFilter === 'unset' ? v != null : v !== statusFilter) return false
       }
-      if (domainFilter !== 'all' && domainOf[p.repo] !== domainFilter) return false
+      if (domainFilter !== 'all' && !domainsOf[p.repo].includes(domainFilter)) return false
       if (!needle) return true
       const hay = [p.name, p.repo, p.description, ...Object.values(p.tech || {}).flat()]
         .join(' ')
@@ -63,14 +60,15 @@ export default function ProjectsView({ tracker }: { tracker: Tracker }) {
         : (b.pushedAt || '').localeCompare(a.pushedAt || ''),
     )
     return list
-  }, [projects, q, statusFilter, domainFilter, domainOf, sort, get])
+  }, [projects, q, statusFilter, domainFilter, domainsOf, sort, get])
 
   return (
     <div>
       <StatStrip total={projects.length} counts={counts} />
 
-      {/* summary chips */}
-      <div className="flex flex-wrap gap-2">
+      {/* status filter */}
+      <div className="flex flex-wrap items-center gap-2">
+        <span className="mr-1 font-mono text-[10.5px] font-bold uppercase tracking-wide text-faint">Status</span>
         <Chip
           active={statusFilter === 'all'}
           label="All"
@@ -107,7 +105,7 @@ export default function ProjectsView({ tracker }: { tracker: Tracker }) {
             active={domainFilter === d}
             label={d}
             count={n}
-            rgb={CATEGORY_ACCENT[d]?.rgb ?? '148,163,184'}
+            rgb={DOMAIN_COLOR[d] ?? '148,163,184'}
             onClick={() => setDomainFilter(d)}
           />
         ))}
