@@ -13,5 +13,20 @@
   },
   "Data-Preprocessing": {
     "status": "revamp"
+  },
+  "Basics-of-Linear-and-Logistic-Regression": {
+    "status": "revamp"
+  },
+  "Tisch-ML-Model": {
+    "status": "revamp"
+  },
+  "Cumida-ML-Model": {
+    "status": "revamp"
+  },
+  "Sepsis-ML-Model": {
+    "status": "revamp"
+  },
+  "RAG-vs-CAG-Showdown": {
+    "status": "done"
   }
 }
