@@ -1,3 +1,4 @@
+import { Fragment } from 'react'
 import type { Project } from '../data/types'
 
 // Preferred display order; anything else falls to the end alphabetically.
@@ -29,11 +30,12 @@ export default function TechStack({ tech }: { tech: Project['tech'] }) {
     return <p className="text-[12.5px] italic text-faint">No tech detected yet — will fill in on next sync.</p>
   }
 
+  // Two aligned columns: category label (top-aligned) | its tags (wrap freely).
   return (
-    <div className="flex flex-col gap-2">
+    <div className="grid grid-cols-[68px_1fr] items-start gap-x-3 gap-y-2">
       {cats.map((cat) => (
-        <div key={cat} className="flex flex-wrap items-center gap-1.5">
-          <span className="w-[72px] shrink-0 text-[10.5px] font-bold uppercase tracking-wide text-faint">
+        <Fragment key={cat}>
+          <span className="pt-1 text-[10px] font-bold uppercase leading-tight tracking-wide text-faint">
             {cat}
           </span>
           <div className="flex flex-wrap gap-1.5">
@@ -48,7 +50,7 @@ export default function TechStack({ tech }: { tech: Project['tech'] }) {
               </span>
             ))}
           </div>
-        </div>
+        </Fragment>
       ))}
     </div>
   )
