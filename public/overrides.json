@@ -55,5 +55,11 @@
   },
   "LLM-Halucination-Detection": {
     "status": "revamp"
+  },
+  "AutoGrader-Agent": {
+    "status": "revamp"
+  },
+  "open-source-LLMs-api-wrapper": {
+    "status": "revamp"
   }
 }
