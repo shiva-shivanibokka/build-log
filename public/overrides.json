@@ -39,5 +39,12 @@
   },
   "Supply-Chain-Demand-Agent": {
     "status": "revamp"
+  },
+  "Core-algorithms-for-Leetcode": {
+    "status": "revamp",
+    "github": "yes"
+  },
+  "Dive-deeper-into-linear-models": {
+    "status": "revamp"
   }
 }
