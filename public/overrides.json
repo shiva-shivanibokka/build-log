@@ -85,5 +85,17 @@
   },
   "ML-Model-Efficiency-Toolkit": {
     "status": "revamp"
+  },
+  "RecSys-Design": {
+    "status": "yet-to-start"
+  },
+  "ResumeForge": {
+    "status": "done"
+  },
+  "Search-Ranking-System": {
+    "status": "in-progress"
+  },
+  "Fine-Tuned-Domain-LLM-QLoRA": {
+    "status": "yet-to-start"
   }
 }
