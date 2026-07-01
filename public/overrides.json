@@ -61,5 +61,17 @@
   },
   "open-source-LLMs-api-wrapper": {
     "status": "revamp"
+  },
+  "All-about-Neural-Networks": {
+    "status": "yet-to-start"
+  },
+  "Games-built-using-Python": {
+    "status": "yet-to-start"
+  },
+  "PrepGap-Lens": {
+    "status": "yet-to-start"
+  },
+  "Super_Resolution_using_HAN": {
+    "status": "revamp"
   }
 }
