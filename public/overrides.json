@@ -112,5 +112,20 @@
   },
   "Federated-Learning-Simulation": {
     "status": "yet-to-start"
+  },
+  "Transfer-Learning-HuggingFace": {
+    "status": "revamp"
+  },
+  "Dive-Deeper-into-Unsupervised-Learning": {
+    "status": "yet-to-start"
+  },
+  "Dive-Deeper-into-Supervised-Learning": {
+    "status": "yet-to-start"
+  },
+  "Dive-Deeper-into-Deep-Learning": {
+    "status": "yet-to-start"
+  },
+  "Gradient-Descent-and-Optimizers": {
+    "status": "revamp"
   }
 }
