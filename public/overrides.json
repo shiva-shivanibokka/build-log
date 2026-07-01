@@ -9,7 +9,9 @@
     "status": "revamp"
   },
   "SCM-using-MCP-and-LLM": {
-    "status": "in-progress"
+    "status": "in-progress",
+    "whatWhy": "yet-to-start",
+    "github": "yes"
   },
   "Data-Preprocessing": {
     "status": "revamp"
@@ -27,6 +29,12 @@
     "status": "revamp"
   },
   "RAG-vs-CAG-Showdown": {
-    "status": "done"
+    "status": "done",
+    "github": "yes",
+    "linkedin": "yes",
+    "whatWhy": "yet-to-start"
+  },
+  "Multi-Horizon-Stock-Forecasting-AI-Model": {
+    "status": "pending"
   }
 }
