@@ -4,29 +4,32 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Light, friendly surface palette
-        canvas: '#F6F7FB',
-        card: '#FFFFFF',
-        ink: '#1E2233',
-        subtle: '#5B6178',
-        faint: '#8A90A6',
-        line: '#E7E9F2',
-        // Status accents (saturated, for dots/icons/bars)
+        // Dark, neon-friendly surface palette
+        canvas: '#07070d',
+        card: '#0f0f1a',
+        ink: '#ECEDF6',
+        subtle: '#A9AEC6',
+        faint: '#71768D',
+        line: '#20212E',
+        // Neon accents (for glows, logo, active states)
         accent: {
-          green: '#22C55E',
-          red: '#EF4444',
-          yellow: '#EAB308',
-          purple: '#A855F7',
-          blue: '#3B82F6',
+          purple: '#a855f7',
+          blue: '#38bdf8',
+          cyan: '#22d3ee',
+          green: '#34d399',
+          pink: '#ec4899',
+          yellow: '#eab308',
         },
       },
       fontFamily: {
-        sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif'],
+        display: ['Orbitron', 'Space Grotesk', 'system-ui', 'sans-serif'],
+        sans: ['Space Grotesk', 'Inter', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
       },
       boxShadow: {
-        card: '0 1px 2px rgba(20,24,45,0.04), 0 8px 24px rgba(20,24,45,0.06)',
-        pop: '0 8px 30px rgba(99,102,241,0.18)',
+        card: '0 10px 40px rgba(0,0,0,0.45)',
+        pop: '0 14px 46px rgba(56,189,248,0.22)',
+        glow: '0 0 20px rgba(168,85,247,0.35)',
       },
       keyframes: {
         'fade-up': {

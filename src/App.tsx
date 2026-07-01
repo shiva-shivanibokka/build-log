@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useTracker } from './lib/store'
 import ProjectsView from './components/ProjectsView'
 import TodoView from './components/TodoView'
+import CircuitBackground from './components/CircuitBackground'
 
 type Tab = 'projects' | 'todo'
 
@@ -19,17 +20,16 @@ export default function App() {
 
   return (
     <div className="min-h-screen">
-      <header className="mx-auto max-w-7xl px-5 pt-8 sm:px-8">
+      <CircuitBackground />
+
+      <header className="mx-auto max-w-7xl px-5 pt-9 sm:px-8">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
-            <h1 className="bg-gradient-to-r from-accent-purple via-accent-blue to-accent-green bg-clip-text text-[clamp(26px,4vw,40px)] font-extrabold leading-none tracking-tight text-transparent">
-              Build Log 🚀
+            <h1 className="inline-block bg-gradient-to-r from-accent-purple via-accent-blue to-accent-green bg-clip-text pb-1.5 font-display text-[clamp(26px,4vw,44px)] font-black leading-[1.2] tracking-wide text-transparent [filter:drop-shadow(0_0_18px_rgba(129,140,248,0.45))]">
+              Build Log{' '}
+              <span className="[-webkit-text-fill-color:initial] [filter:none]">🚀</span>
             </h1>
-            <p className="mt-2 text-[13.5px] text-subtle">
-              {tab === 'projects'
-                ? 'Auto-synced from GitHub — descriptions & tech fill themselves; you just set the dropdowns.'
-                : 'Project ideas you want to build — a running to-do list.'}
-            </p>
+            <p className="mt-1.5 font-mono text-[13px] tracking-wide text-accent-cyan/80">Build. Ship. Log.</p>
           </div>
 
           <div className="flex items-center gap-3">
@@ -42,12 +42,12 @@ export default function App() {
                 </div>
                 <button
                   onClick={tracker.exportOverrides}
-                  className="relative inline-flex items-center gap-2 rounded-xl bg-ink px-4 py-2.5 text-[13px] font-semibold text-white shadow-card transition hover:-translate-y-0.5 hover:shadow-pop"
+                  className="relative inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-accent-purple to-accent-blue px-4 py-2.5 text-[13px] font-semibold text-white shadow-glow transition hover:-translate-y-0.5 hover:shadow-pop"
                   title="Download overrides.json, then commit it to the repo so your choices persist across devices"
                 >
                   ⬇ Export
                   {tracker.dirtyCount > 0 && (
-                    <span className="absolute -right-1.5 -top-1.5 grid h-5 min-w-5 place-items-center rounded-full bg-accent-purple px-1 text-[10.5px] font-bold text-white">
+                    <span className="absolute -right-1.5 -top-1.5 grid h-5 min-w-5 place-items-center rounded-full bg-accent-pink px-1 text-[10.5px] font-bold text-white">
                       {tracker.dirtyCount}
                     </span>
                   )}
@@ -58,7 +58,7 @@ export default function App() {
         </div>
 
         {/* tabs */}
-        <nav className="mt-6 flex items-center gap-1 border-b border-line">
+        <nav className="mt-6 flex items-center gap-1 border-b border-white/10">
           <TabButton active={tab === 'projects'} onClick={() => setTab('projects')}>
             Projects
           </TabButton>
@@ -72,11 +72,11 @@ export default function App() {
         {tab === 'projects' ? (
           <>
             {tracker.dirtyCount > 0 && (
-              <div className="mb-5 flex flex-wrap items-center gap-2 rounded-xl border border-purple-200 bg-purple-50 px-4 py-2.5 text-[12.5px] text-purple-800">
+              <div className="mb-5 flex flex-wrap items-center gap-2 rounded-xl border border-purple-500/30 bg-purple-500/10 px-4 py-2.5 text-[12.5px] text-purple-200">
                 <span className="font-semibold">
                   {tracker.dirtyCount} unsaved change{tracker.dirtyCount > 1 ? 's' : ''}
                 </span>
-                <span className="text-purple-700/80">
+                <span className="text-purple-200/70">
                   saved in this browser. Hit <b>Export</b> and commit the file to keep them permanently / see them on
                   other devices.
                 </span>
@@ -86,7 +86,7 @@ export default function App() {
             {tracker.loading && <p className="py-20 text-center text-[14px] text-faint">Loading projects…</p>}
 
             {tracker.error && (
-              <div className="rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-[13px] text-rose-700">
+              <div className="rounded-xl border border-rose-500/30 bg-rose-500/10 px-4 py-3 text-[13px] text-rose-300">
                 Couldn’t load <code>projects.json</code> ({tracker.error}). Run <code>npm run sync</code> to generate it.
               </div>
             )}
@@ -120,7 +120,7 @@ function TabButton({
     <button
       onClick={onClick}
       className={`-mb-px border-b-2 px-4 py-2.5 text-[14px] font-semibold transition ${
-        active ? 'border-accent-purple text-ink' : 'border-transparent text-subtle hover:text-ink'
+        active ? 'border-accent-cyan text-ink' : 'border-transparent text-subtle hover:text-ink'
       }`}
     >
       {children}

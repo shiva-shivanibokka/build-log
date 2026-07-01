@@ -94,16 +94,16 @@ export default function ProjectsView({ tracker }: { tracker: Tracker }) {
             value={q}
             onChange={(e) => setQ(e.target.value)}
             placeholder="Search name, description, or tech…"
-            className="w-full rounded-xl border border-line bg-card py-2.5 pl-9 pr-3 text-[13.5px] text-ink shadow-sm outline-none transition focus:border-accent-purple focus:ring-2 focus:ring-purple-100"
+            className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2.5 pl-9 pr-3 text-[13.5px] text-ink outline-none transition placeholder:text-faint focus:border-accent-cyan focus:ring-2 focus:ring-accent-cyan/20"
           />
         </div>
-        <div className="flex items-center gap-1.5 rounded-xl border border-line bg-card p-1 shadow-sm">
+        <div className="flex items-center gap-1.5 rounded-xl border border-white/10 bg-white/[0.03] p-1">
           {(['recent', 'name'] as SortKey[]).map((s) => (
             <button
               key={s}
               onClick={() => setSort(s)}
               className={`rounded-lg px-3 py-1.5 text-[12.5px] font-semibold transition ${
-                sort === s ? 'bg-ink text-white' : 'text-subtle hover:text-ink'
+                sort === s ? 'bg-white/10 text-ink' : 'text-subtle hover:text-ink'
               }`}
             >
               {s === 'recent' ? 'Recently pushed' : 'A → Z'}
@@ -151,13 +151,13 @@ function Chip({
       onClick={onClick}
       className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[12.5px] font-semibold transition ${
         active
-          ? 'border-transparent bg-ink text-white shadow-sm'
-          : 'border-line bg-card text-subtle hover:border-slate-300 hover:text-ink'
+          ? 'border-accent-cyan/50 bg-accent-cyan/15 text-ink shadow-[0_0_16px_rgba(34,211,238,0.2)]'
+          : 'border-white/10 bg-white/[0.03] text-subtle hover:border-white/25 hover:text-ink'
       }`}
     >
       <span className={`h-2 w-2 rounded-full ${dot}`} />
       {label}
-      <span className={`tabular-nums ${active ? 'text-white/70' : 'text-faint'}`}>{count}</span>
+      <span className={`tabular-nums ${active ? 'text-ink/70' : 'text-faint'}`}>{count}</span>
     </button>
   )
 }

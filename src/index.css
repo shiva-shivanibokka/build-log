@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 html {
@@ -12,25 +12,43 @@ html {
 
 body {
   margin: 0;
-  background:
-    radial-gradient(1200px 600px at 10% -10%, rgba(168, 85, 247, 0.10), transparent 55%),
-    radial-gradient(1000px 500px at 100% 0%, rgba(59, 130, 246, 0.10), transparent 50%),
-    #f6f7fb;
-  background-attachment: fixed;
-  color: #1e2233;
-  font-family: 'Plus Jakarta Sans', Inter, system-ui, sans-serif;
+  background: #07070d;
+  color: #ecedf6;
+  font-family: 'Space Grotesk', Inter, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Thin, friendly scrollbar */
+/* Soft vignette + top glow over the circuit canvas so content stays readable */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -5;
+  pointer-events: none;
+  background:
+    radial-gradient(1100px 560px at 50% -10%, rgba(56, 130, 246, 0.10), transparent 60%),
+    radial-gradient(900px 600px at 90% 110%, rgba(168, 85, 247, 0.10), transparent 60%),
+    radial-gradient(1200px 800px at 50% 50%, transparent 40%, rgba(4, 4, 9, 0.7) 100%);
+}
+
+/* Thin neon scrollbar */
 *::-webkit-scrollbar {
   height: 10px;
   width: 10px;
 }
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
 *::-webkit-scrollbar-thumb {
-  background: #d6d9e6;
+  background: #2a2c3d;
   border-radius: 999px;
 }
 *::-webkit-scrollbar-thumb:hover {
-  background: #c2c6da;
+  background: #3a3d52;
+}
+
+/* Native dropdown options render on the OS layer — force dark so they're readable */
+select option {
+  background: #12121e;
+  color: #ecedf6;
 }

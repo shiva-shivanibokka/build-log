@@ -5,16 +5,16 @@ import type { Project } from '../data/types'
 const ORDER = ['Frontend', 'Backend', 'Database', 'ML / AI', 'Data', 'DevOps', 'Cloud', 'Mobile', 'Language', 'Other']
 
 const CAT_STYLE: Record<string, string> = {
-  Frontend: 'bg-sky-50 text-sky-700 ring-sky-200',
-  Backend: 'bg-indigo-50 text-indigo-700 ring-indigo-200',
-  Database: 'bg-teal-50 text-teal-700 ring-teal-200',
-  'ML / AI': 'bg-fuchsia-50 text-fuchsia-700 ring-fuchsia-200',
-  Data: 'bg-emerald-50 text-emerald-700 ring-emerald-200',
-  DevOps: 'bg-orange-50 text-orange-700 ring-orange-200',
-  Cloud: 'bg-cyan-50 text-cyan-700 ring-cyan-200',
-  Mobile: 'bg-rose-50 text-rose-700 ring-rose-200',
-  Language: 'bg-slate-50 text-slate-600 ring-slate-200',
-  Other: 'bg-slate-50 text-slate-600 ring-slate-200',
+  Frontend: 'bg-sky-500/10 text-sky-300 ring-sky-500/25',
+  Backend: 'bg-indigo-500/10 text-indigo-300 ring-indigo-500/25',
+  Database: 'bg-teal-500/10 text-teal-300 ring-teal-500/25',
+  'ML / AI': 'bg-fuchsia-500/10 text-fuchsia-300 ring-fuchsia-500/25',
+  Data: 'bg-emerald-500/10 text-emerald-300 ring-emerald-500/25',
+  DevOps: 'bg-orange-500/10 text-orange-300 ring-orange-500/25',
+  Cloud: 'bg-cyan-500/10 text-cyan-300 ring-cyan-500/25',
+  Mobile: 'bg-rose-500/10 text-rose-300 ring-rose-500/25',
+  Language: 'bg-white/[0.05] text-slate-300 ring-white/10',
+  Other: 'bg-white/[0.05] text-slate-300 ring-white/10',
 }
 
 export default function TechStack({ tech }: { tech: Project['tech'] }) {

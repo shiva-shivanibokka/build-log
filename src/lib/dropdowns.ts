@@ -35,19 +35,19 @@ export const DROPDOWNS: DropdownDef[] = [
 ]
 
 export const toneClasses: Record<Tone, string> = {
-  green: 'bg-emerald-100 text-emerald-700 ring-emerald-200 hover:bg-emerald-200/70',
-  red: 'bg-rose-100 text-rose-700 ring-rose-200 hover:bg-rose-200/70',
-  yellow: 'bg-amber-100 text-amber-700 ring-amber-200 hover:bg-amber-200/70',
-  purple: 'bg-purple-100 text-purple-700 ring-purple-200 hover:bg-purple-200/70',
-  neutral: 'bg-slate-100 text-slate-500 ring-slate-200 hover:bg-slate-200/70',
+  green: 'bg-emerald-500/15 text-emerald-300 ring-emerald-500/40 hover:bg-emerald-500/25',
+  red: 'bg-rose-500/15 text-rose-300 ring-rose-500/40 hover:bg-rose-500/25',
+  yellow: 'bg-amber-500/15 text-amber-300 ring-amber-500/40 hover:bg-amber-500/25',
+  purple: 'bg-purple-500/20 text-purple-300 ring-purple-500/40 hover:bg-purple-500/30',
+  neutral: 'bg-white/[0.06] text-slate-400 ring-white/10 hover:bg-white/10',
 }
 
 export const toneDot: Record<Tone, string> = {
-  green: 'bg-emerald-500',
-  red: 'bg-rose-500',
-  yellow: 'bg-amber-500',
-  purple: 'bg-purple-500',
-  neutral: 'bg-slate-300',
+  green: 'bg-emerald-400 shadow-[0_0_8px] shadow-emerald-400/70',
+  red: 'bg-rose-400 shadow-[0_0_8px] shadow-rose-400/70',
+  yellow: 'bg-amber-400 shadow-[0_0_8px] shadow-amber-400/70',
+  purple: 'bg-purple-400 shadow-[0_0_8px] shadow-purple-400/70',
+  neutral: 'bg-slate-500',
 }
 
 export function optionFor(def: DropdownDef, value: string | undefined): Option | null {
