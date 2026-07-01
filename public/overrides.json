@@ -73,5 +73,17 @@
   },
   "Super_Resolution_using_HAN": {
     "status": "revamp"
+  },
+  "Wellnest-Curated-Health-Web-App": {
+    "status": "revamp"
+  },
+  "HireView": {
+    "status": "revamp"
+  },
+  "Fraud-Detection-System": {
+    "status": "done"
+  },
+  "ML-Model-Efficiency-Toolkit": {
+    "status": "revamp"
   }
 }
