@@ -31,7 +31,7 @@ export default function App() {
             <h1 className="inline-block bg-gradient-to-r from-accent-purple via-accent-blue to-accent-green bg-clip-text pb-1.5 font-display text-[clamp(26px,4vw,44px)] font-black leading-[1.2] tracking-wide text-transparent [filter:drop-shadow(0_0_18px_rgba(129,140,248,0.45))]">
               Build Log <span className="[-webkit-text-fill-color:initial] [filter:none]">🚀</span>
             </h1>
-            <p className="mt-1.5 font-mono text-[13px] tracking-wide text-accent-cyan/80">Build. Ship. Log.</p>
+            <p className="mt-2 font-mono text-[15px] tracking-wide text-accent-cyan/90">Build. Ship. Log.</p>
           </div>
 
           <div className="flex items-center gap-3">
@@ -45,7 +45,7 @@ export default function App() {
             {tab === 'projects' && <SyncBadge state={badgeState} onManual={tracker.syncNow} />}
             <button
               onClick={() => setSettingsOpen(true)}
-              className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/[0.03] text-[15px] text-subtle transition hover:border-white/25 hover:text-ink"
+              className="grid h-11 w-11 place-items-center rounded-xl border border-accent-cyan/45 bg-accent-cyan/10 text-[20px] text-accent-cyan shadow-[0_0_16px_rgba(34,211,238,0.28)] transition hover:-translate-y-0.5 hover:border-accent-cyan/80 hover:bg-accent-cyan/20"
               title="Auto-sync settings"
               aria-label="Settings"
             >
@@ -114,7 +114,7 @@ export default function App() {
         )}
       </main>
 
-      <footer className="mx-auto max-w-7xl px-5 pb-10 pt-4 text-center text-[11.5px] text-faint sm:px-8">
+      <footer className="mx-auto max-w-7xl px-5 pb-10 pt-4 text-center text-[12.5px] text-faint sm:px-8">
         {tab === 'projects'
           ? 'New repo on GitHub? It appears here automatically on the next sync (each deploy, weekly, or a manual run).'
           : 'Project ideas you want to build.'}

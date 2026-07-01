@@ -68,7 +68,7 @@ export default function ProjectsView({ tracker }: { tracker: Tracker }) {
 
       {/* status filter */}
       <div className="flex flex-wrap items-center gap-2">
-        <span className="mr-1 font-mono text-[10.5px] font-bold uppercase tracking-wide text-faint">Status</span>
+        <span className="mr-1 font-mono text-[12px] font-bold uppercase tracking-wide text-faint">Status</span>
         <Chip
           active={statusFilter === 'all'}
           label="All"
@@ -97,8 +97,8 @@ export default function ProjectsView({ tracker }: { tracker: Tracker }) {
 
       {/* domain filter (colours match each card's stripe/title) */}
       <div className="mt-2.5 flex flex-wrap items-center gap-2">
-        <span className="mr-1 font-mono text-[10.5px] font-bold uppercase tracking-wide text-faint">Domain</span>
-        <DomainChip active={domainFilter === 'all'} label="All" rgb="148,163,184" onClick={() => setDomainFilter('all')} />
+        <span className="mr-1 font-mono text-[12px] font-bold uppercase tracking-wide text-faint">Domain</span>
+        <DomainChip active={domainFilter === 'all'} label="All" count={projects.length} rgb="148,163,184" onClick={() => setDomainFilter('all')} />
         {domains.map(([d, n]) => (
           <DomainChip
             key={d}
@@ -151,7 +151,7 @@ export default function ProjectsView({ tracker }: { tracker: Tracker }) {
         </div>
       )}
 
-      <p className="mt-6 text-center text-[12px] text-faint">
+      <p className="mt-6 text-center text-[13px] text-faint">
         Showing {visible.length} of {projects.length} repos
         {statusFilter !== 'all' && <> · {optionFor(STATUS_DEF, statusFilter)?.label ?? 'Unset'}</>}
         {domainFilter !== 'all' && <> · {domainFilter}</>}
@@ -176,7 +176,7 @@ function DomainChip({
   return (
     <button
       onClick={onClick}
-      className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[12px] font-semibold transition ${
+      className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[13px] font-semibold transition ${
         active ? 'text-ink' : 'border-white/10 bg-white/[0.03] text-subtle hover:border-white/25 hover:text-ink'
       }`}
       style={
@@ -208,7 +208,7 @@ function Chip({
   return (
     <button
       onClick={onClick}
-      className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[12.5px] font-semibold transition ${
+      className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[13px] font-semibold transition ${
         active
           ? 'border-accent-cyan/50 bg-accent-cyan/15 text-ink shadow-[0_0_16px_rgba(34,211,238,0.2)]'
           : 'border-white/10 bg-white/[0.03] text-subtle hover:border-white/25 hover:text-ink'

@@ -10,9 +10,11 @@ export interface Todo {
   title: string
   implemented?: string // 'yes' | 'no'
   priority?: string // 'high' | 'medium' | 'low'
-  domain?: string
+  domain?: string // one of the field domains (colored)
   tech?: string
   notes?: string
+  repo?: string // once built: the GitHub repo name it became
+  target?: string // optional target date (YYYY-MM-DD)
   createdAt: string
 }
 
