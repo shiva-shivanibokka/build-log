@@ -1,1 +1,14 @@
-{}
+{
+  "shiva-shivanibokka.github.io": {
+    "status": "done"
+  },
+  "Churn-Intelligence-Platform": {
+    "status": "done"
+  },
+  "CodePilot-Agent": {
+    "status": "revamp"
+  },
+  "SCM-using-MCP-and-LLM": {
+    "status": "in-progress"
+  }
+}
