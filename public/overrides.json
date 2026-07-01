@@ -10,5 +10,8 @@
   },
   "SCM-using-MCP-and-LLM": {
     "status": "in-progress"
+  },
+  "Data-Preprocessing": {
+    "status": "revamp"
   }
 }
