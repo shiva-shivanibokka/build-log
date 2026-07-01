@@ -9,7 +9,7 @@
     "status": "revamp"
   },
   "SCM-using-MCP-and-LLM": {
-    "status": "in-progress",
+    "status": "done",
     "whatWhy": "yet-to-start",
     "github": "yes"
   },
@@ -45,6 +45,15 @@
     "github": "yes"
   },
   "Dive-deeper-into-linear-models": {
+    "status": "revamp"
+  },
+  "Competitor-Insight-Engine": {
+    "status": "revamp"
+  },
+  "All-About-Cross-Validation": {
+    "status": "revamp"
+  },
+  "LLM-Halucination-Detection": {
     "status": "revamp"
   }
 }
