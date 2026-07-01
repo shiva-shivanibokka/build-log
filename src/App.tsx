@@ -43,9 +43,9 @@ export default function App() {
                 <button
                   onClick={tracker.exportOverrides}
                   className="relative inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-accent-purple to-accent-blue px-4 py-2.5 text-[13px] font-semibold text-white shadow-glow transition hover:-translate-y-0.5 hover:shadow-pop"
-                  title="Download overrides.json, then commit it to the repo so your choices persist across devices"
+                  title="Your dropdown picks auto-save in this browser. Click to download a backup (overrides.json) you can commit to the repo so they're permanent and show on other devices."
                 >
-                  ⬇ Export
+                  ⬇ Back up
                   {tracker.dirtyCount > 0 && (
                     <span className="absolute -right-1.5 -top-1.5 grid h-5 min-w-5 place-items-center rounded-full bg-accent-pink px-1 text-[10.5px] font-bold text-white">
                       {tracker.dirtyCount}

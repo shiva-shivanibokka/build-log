@@ -1,5 +1,5 @@
 import type { Tone } from '../lib/dropdowns'
-import { toneClasses, toneDot } from '../lib/dropdowns'
+import Select from './Select'
 import { useTodos } from '../lib/todos'
 import type { Todo } from '../lib/todos'
 
@@ -43,9 +43,9 @@ export default function TodoView() {
           <button
             onClick={exportTodos}
             className="rounded-xl border border-white/10 bg-white/[0.03] px-3.5 py-2 text-[12.5px] font-semibold text-subtle transition hover:text-ink"
-            title="Download todo.json and commit it to persist across devices"
+            title="Your ideas auto-save in this browser. Click to download a backup (todo.json) you can commit to keep them permanently / sync across devices."
           >
-            ⬇ Export
+            ⬇ Back up
           </button>
           <button onClick={add} className={primaryBtn}>
             + New idea
@@ -114,10 +114,10 @@ function Row({
         />
       </td>
       <td className="px-2 py-3">
-        <ColorSelect value={todo.implemented} options={IMPLEMENTED} onChange={(v) => update(todo.id, { implemented: v })} />
+        <Select value={todo.implemented} options={IMPLEMENTED} onChange={(v) => update(todo.id, { implemented: v })} ariaLabel="Implemented" placeholder="—" />
       </td>
       <td className="px-2 py-3">
-        <ColorSelect value={todo.priority} options={PRIORITY} onChange={(v) => update(todo.id, { priority: v })} />
+        <Select value={todo.priority} options={PRIORITY} onChange={(v) => update(todo.id, { priority: v })} ariaLabel="Priority" placeholder="—" />
       </td>
       <td className="px-2 py-3">
         <CellInput value={todo.domain} onChange={(v) => update(todo.id, { domain: v })} placeholder="e.g. Agentic" />
@@ -162,39 +162,5 @@ function CellInput({
       placeholder={placeholder}
       className="w-full rounded-md border border-transparent bg-transparent px-1.5 py-1 text-[12.5px] text-subtle transition placeholder:text-faint/70 hover:border-white/15 focus:border-accent-cyan focus:bg-white/5 focus:text-ink focus:outline-none"
     />
-  )
-}
-
-function ColorSelect({
-  value,
-  options,
-  onChange,
-}: {
-  value: string | undefined
-  options: Opt[]
-  onChange: (v: string | undefined) => void
-}) {
-  const tone = options.find((o) => o.value === value)?.tone ?? 'neutral'
-  return (
-    <span
-      className={`relative inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[12px] font-semibold ring-1 ${toneClasses[tone]}`}
-    >
-      <span className={`h-1.5 w-1.5 shrink-0 rounded-full ${toneDot[tone]}`} />
-      <select
-        value={value ?? ''}
-        onChange={(e) => onChange(e.target.value || undefined)}
-        className="cursor-pointer appearance-none bg-transparent pr-3 font-semibold focus:outline-none"
-      >
-        <option value="">—</option>
-        {options.map((o) => (
-          <option key={o.value} value={o.value}>
-            {o.label}
-          </option>
-        ))}
-      </select>
-      <svg className="pointer-events-none absolute right-1.5 h-2.5 w-2.5 opacity-60" viewBox="0 0 12 12" fill="none">
-        <path d="M3 4.5 6 7.5 9 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    </span>
   )
 }

@@ -104,7 +104,7 @@ function readmeIntro(md) {
       .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
       .replace(/[*_`>#]/g, '')
       .trim()
-    if (line.length > 20) return line.slice(0, 220)
+    if (line.length > 20) return line.slice(0, 320)
   }
   return ''
 }

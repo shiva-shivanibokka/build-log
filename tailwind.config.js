@@ -7,9 +7,9 @@ export default {
         // Dark, neon-friendly surface palette
         canvas: '#07070d',
         card: '#0f0f1a',
-        ink: '#ECEDF6',
-        subtle: '#A9AEC6',
-        faint: '#71768D',
+        ink: '#F4F5FB',
+        subtle: '#CBCFE0',
+        faint: '#9297AE',
         line: '#20212E',
         // Neon accents (for glows, logo, active states)
         accent: {
