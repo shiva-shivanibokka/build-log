@@ -127,5 +127,23 @@
   },
   "Gradient-Descent-and-Optimizers": {
     "status": "revamp"
+  },
+  "ML-System-Design-Recommendation-Engine": {
+    "status": "in-progress"
+  },
+  "ML-System-Design-Model-Serving": {
+    "status": "in-progress"
+  },
+  "ML-System-Design-Retraining-Pipeline": {
+    "status": "in-progress"
+  },
+  "ML-System-Design-Batch-Inference": {
+    "status": "revamp"
+  },
+  "ML-System-Design-Feature-Store": {
+    "status": "revamp"
+  },
+  "SQL-and-Database-Skills": {
+    "status": "revamp"
   }
 }
