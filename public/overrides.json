@@ -160,5 +160,9 @@
   },
   "LLM-research-scraper": {
     "status": "yet-to-start"
+  },
+  "take-home-project": {
+    "github": "yes",
+    "status": "done"
   }
 }
