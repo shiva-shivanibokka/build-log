@@ -129,7 +129,8 @@
     "status": "revamp"
   },
   "ML-System-Design-Recommendation-Engine": {
-    "status": "in-progress"
+    "status": "done",
+    "github": "yes"
   },
   "ML-System-Design-Model-Serving": {
     "status": "in-progress"
