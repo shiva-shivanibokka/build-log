@@ -67,11 +67,11 @@ function Notes({ value, onChange }: { value: string; onChange: (v: string) => vo
     <div className="border-t border-white/10 pt-3">
       <button
         onClick={() => setOpen((o) => !o)}
-        className="flex items-center gap-1.5 text-[12px] font-semibold text-accent-cyan transition hover:text-accent-blue"
+        className="flex items-center gap-1.5 text-[13.5px] font-semibold text-accent-cyan transition hover:text-accent-blue"
         aria-expanded={open}
       >
         <span>📝 Notes{!open && value ? ` · ${value.trim().split(/\s+/).length}w` : ''}</span>
-        <span className="text-[10px]">{open ? '▲' : '▾'}</span>
+        <span className="text-[11px]">{open ? '▲' : '▾'}</span>
       </button>
       {open && (
         <textarea

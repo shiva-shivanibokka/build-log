@@ -32,10 +32,10 @@ export default function TechStack({ tech }: { tech: Project['tech'] }) {
 
   // Two aligned columns: category label (top-aligned) | its tags (wrap freely).
   return (
-    <div className="grid grid-cols-[74px_1fr] items-start gap-x-3 gap-y-2">
+    <div className="grid grid-cols-[86px_1fr] items-start gap-x-3 gap-y-2">
       {cats.map((cat) => (
         <Fragment key={cat}>
-          <span className="pt-1 text-[10.5px] font-bold uppercase leading-tight tracking-wide text-faint">
+          <span className="pt-1 text-[12px] font-bold uppercase leading-tight tracking-wide text-faint">
             {cat}
           </span>
           <div className="flex flex-wrap gap-1.5">

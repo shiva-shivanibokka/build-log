@@ -144,7 +144,7 @@ export default function ProjectsView({ tracker }: { tracker: Tracker }) {
       {visible.length === 0 ? (
         <p className="mt-12 text-center text-[14px] text-faint">No projects match.</p>
       ) : (
-        <div className="mt-5 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-5 grid grid-cols-1 items-start gap-4 md:grid-cols-2 xl:grid-cols-3">
           {visible.map((p) => (
             <ProjectCard key={p.repo} project={p} tracker={tracker} />
           ))}
