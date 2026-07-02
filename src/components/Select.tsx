@@ -1,15 +1,13 @@
-import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import type { Tone } from '../lib/dropdowns'
 import { toneClasses, toneDot } from '../lib/dropdowns'
+import { usePopover } from './usePopover'
 
 export interface SelectOption {
   value: string
   label: string
   tone: Tone
 }
-
-type Pos = { top: number; left: number; width: number }
 
 // Custom dropdown replacing the native <select>. The option panel is rendered
 // in a portal with fixed positioning so it floats above the glass cards (which
@@ -29,60 +27,17 @@ export default function Select({
   placeholder?: string
   includeClear?: boolean
 }) {
-  const [open, setOpen] = useState(false)
-  const [pos, setPos] = useState<Pos | null>(null)
-  const btnRef = useRef<HTMLButtonElement>(null)
-  const panelRef = useRef<HTMLUListElement>(null)
+  const rows = options.length + (includeClear ? 1 : 0)
+  const { open, pos, triggerRef: btnRef, panelRef, toggle, close } = usePopover({
+    estHeight: rows * 36 + 10,
+    minWidth: 160,
+  })
   const cur = options.find((o) => o.value === value) ?? null
   const tone: Tone = cur?.tone ?? 'neutral'
 
-  const place = () => {
-    const el = btnRef.current
-    if (!el) return
-    const r = el.getBoundingClientRect()
-    const rows = options.length + (includeClear ? 1 : 0)
-    const estH = rows * 36 + 10
-    // flip upward when there isn't room below (e.g. cards low in the viewport)
-    const openUp = r.bottom + estH + 8 > window.innerHeight && r.top - estH - 8 > 0
-    const width = Math.max(r.width, 160)
-    let left = r.left
-    if (left + width > window.innerWidth - 8) left = window.innerWidth - width - 8
-    setPos({ top: openUp ? r.top - estH - 6 : r.bottom + 6, left, width })
-  }
-
-  const toggle = () => {
-    if (open) {
-      setOpen(false)
-    } else {
-      place()
-      setOpen(true)
-    }
-  }
-
-  useEffect(() => {
-    if (!open) return
-    const onDown = (e: MouseEvent) => {
-      const t = e.target as Node
-      if (btnRef.current?.contains(t) || panelRef.current?.contains(t)) return
-      setOpen(false)
-    }
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false)
-    const onScroll = () => setOpen(false)
-    document.addEventListener('mousedown', onDown)
-    document.addEventListener('keydown', onKey)
-    window.addEventListener('scroll', onScroll, true)
-    window.addEventListener('resize', onScroll)
-    return () => {
-      document.removeEventListener('mousedown', onDown)
-      document.removeEventListener('keydown', onKey)
-      window.removeEventListener('scroll', onScroll, true)
-      window.removeEventListener('resize', onScroll)
-    }
-  }, [open])
-
   const choose = (v: string | undefined) => {
     onChange(v)
-    setOpen(false)
+    close()
   }
 
   return (

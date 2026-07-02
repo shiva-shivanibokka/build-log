@@ -56,11 +56,3 @@ export function domainsFor(tech: Record<string, string[]>): string[] {
   const found = DOMAIN_ORDER.filter((d) => SIGNALS[d].some((sig) => joined.includes(sig)))
   return found.length ? found : ['Other']
 }
-
-export function primaryDomain(tech: Record<string, string[]>): string {
-  return domainsFor(tech)[0]
-}
-
-export function accentRgb(tech: Record<string, string[]>): string {
-  return DOMAIN_COLOR[primaryDomain(tech)] ?? DOMAIN_COLOR.Other
-}

@@ -83,18 +83,32 @@ export function useTracker(): Tracker {
 
   const effective = useMemo(() => merge(baseline, local), [baseline, local])
 
-  const get = useCallback((repo: string, key: DropdownKey) => effective[repo]?.[key], [effective])
+  const get = useCallback(
+    (repo: string, key: DropdownKey) => {
+      const v = effective[repo]?.[key]
+      return v === '' ? undefined : v
+    },
+    [effective],
+  )
 
-  const set = useCallback((repo: string, key: DropdownKey, value: string | undefined) => {
-    setLocal((prev) => {
-      const next: Overrides = { ...prev, [repo]: { ...(prev[repo] || {}) } }
-      if (value === undefined) delete (next[repo] as Override)[key]
-      else (next[repo] as Override)[key] = value
-      if (Object.keys(next[repo]).length === 0) delete next[repo]
-      writeLocal(next)
-      return next
-    })
-  }, [])
+  const set = useCallback(
+    (repo: string, key: DropdownKey, value: string | undefined) => {
+      setLocal((prev) => {
+        const next: Overrides = { ...prev, [repo]: { ...(prev[repo] || {}) } }
+        if (value === undefined) {
+          // Tombstone hides a value already committed to baseline; otherwise just drop the local edit.
+          if (baseline[repo]?.[key] !== undefined) (next[repo] as Override)[key] = ''
+          else delete (next[repo] as Override)[key]
+        } else {
+          (next[repo] as Override)[key] = value
+        }
+        if (Object.keys(next[repo]).length === 0) delete next[repo]
+        writeLocal(next)
+        return next
+      })
+    },
+    [baseline],
+  )
 
   const dirtyCount = useMemo(() => {
     let n = 0

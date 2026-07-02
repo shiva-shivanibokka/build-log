@@ -59,7 +59,3 @@ export function optionFor(def: DropdownDef, value: string | undefined): Option |
   if (!value) return null
   return def.options.find((o) => o.value === value) ?? null
 }
-
-export function toneFor(def: DropdownDef, value: string | undefined): Tone {
-  return optionFor(def, value)?.tone ?? 'neutral'
-}

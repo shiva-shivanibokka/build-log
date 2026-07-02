@@ -215,10 +215,8 @@ async function main() {
       name: pretty(repo.name),
       description: repo.description || '',
       url: repo.html_url,
-      homepage: repo.homepage || undefined,
       pushedAt: repo.pushed_at,
       stars: repo.stargazers_count || 0,
-      primaryLanguage: repo.language || null,
       tech: {},
     }
     if (!BASIC) {
@@ -238,7 +236,6 @@ async function main() {
   const outFile = path.join(outDir, 'projects.json')
   const payload = {
     generatedAt: new Date().toISOString(),
-    owner: OWNER,
     projects,
   }
   fs.writeFileSync(outFile, JSON.stringify(payload, null, 2) + '\n')

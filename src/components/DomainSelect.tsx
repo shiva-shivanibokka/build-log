@@ -1,8 +1,6 @@
-import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { DOMAIN_COLOR, DOMAIN_ORDER } from '../lib/domains'
-
-type Pos = { top: number; left: number; width: number }
+import { usePopover } from './usePopover'
 
 // Colored domain picker for To Do ideas — same palette as the Projects cards.
 export default function DomainSelect({
@@ -12,56 +10,15 @@ export default function DomainSelect({
   value: string | undefined
   onChange: (v: string | undefined) => void
 }) {
-  const [open, setOpen] = useState(false)
-  const [pos, setPos] = useState<Pos | null>(null)
-  const btnRef = useRef<HTMLButtonElement>(null)
-  const panelRef = useRef<HTMLUListElement>(null)
+  const { open, pos, triggerRef: btnRef, panelRef, toggle, close } = usePopover({
+    estHeight: (DOMAIN_ORDER.length + 1) * 34 + 10,
+    minWidth: 170,
+  })
   const rgb = value ? DOMAIN_COLOR[value] ?? DOMAIN_COLOR.Other : null
-
-  const place = () => {
-    const el = btnRef.current
-    if (!el) return
-    const r = el.getBoundingClientRect()
-    const estH = (DOMAIN_ORDER.length + 1) * 34 + 10
-    const up = r.bottom + estH + 8 > window.innerHeight && r.top - estH - 8 > 0
-    let left = r.left
-    const width = Math.max(r.width, 170)
-    if (left + width > window.innerWidth - 8) left = window.innerWidth - width - 8
-    setPos({ top: up ? r.top - estH - 6 : r.bottom + 6, left, width })
-  }
-
-  const toggle = () => {
-    if (open) setOpen(false)
-    else {
-      place()
-      setOpen(true)
-    }
-  }
-
-  useEffect(() => {
-    if (!open) return
-    const onDown = (e: MouseEvent) => {
-      const t = e.target as Node
-      if (btnRef.current?.contains(t) || panelRef.current?.contains(t)) return
-      setOpen(false)
-    }
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false)
-    const onScroll = () => setOpen(false)
-    document.addEventListener('mousedown', onDown)
-    document.addEventListener('keydown', onKey)
-    window.addEventListener('scroll', onScroll, true)
-    window.addEventListener('resize', onScroll)
-    return () => {
-      document.removeEventListener('mousedown', onDown)
-      document.removeEventListener('keydown', onKey)
-      window.removeEventListener('scroll', onScroll, true)
-      window.removeEventListener('resize', onScroll)
-    }
-  }, [open])
 
   const choose = (v: string | undefined) => {
     onChange(v)
-    setOpen(false)
+    close()
   }
 
   return (

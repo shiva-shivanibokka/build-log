@@ -5,16 +5,13 @@ export interface Project {
   name: string // prettified display name
   description: string
   url: string
-  homepage?: string
   pushedAt: string
   stars: number
-  primaryLanguage: string | null
   tech: Record<string, string[]> // category -> technologies, e.g. { Frontend: ['React'] }
 }
 
 export interface ProjectsFile {
   generatedAt: string
-  owner: string
   projects: Project[]
 }
 
