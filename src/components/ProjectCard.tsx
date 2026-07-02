@@ -31,17 +31,21 @@ function Description({ text }: { text: string }) {
 
   return (
     <div className="mt-1.5">
-      <p ref={ref} className={`text-[14px] leading-relaxed text-subtle ${expanded ? '' : 'line-clamp-3'}`}>
+      <p ref={ref} className={`text-[14px] leading-relaxed text-subtle ${expanded ? '' : 'line-clamp-3 min-h-[4.3rem]'}`}>
         {text}
       </p>
-      {overflowing && (
-        <button
-          onClick={() => setExpanded((e) => !e)}
-          className="mt-0.5 text-[12px] font-semibold text-accent-cyan transition hover:text-accent-blue"
-        >
-          {expanded ? 'less ▲' : 'more ▾'}
-        </button>
-      )}
+      {/* toggle row height is reserved on every card so collapsed cards stay even
+          whether or not the description overflows */}
+      <div className="mt-0.5 min-h-[1.1rem]">
+        {overflowing && (
+          <button
+            onClick={() => setExpanded((e) => !e)}
+            className="text-[12px] font-semibold text-accent-cyan transition hover:text-accent-blue"
+          >
+            {expanded ? 'less ▲' : 'more ▾'}
+          </button>
+        )}
+      </div>
     </div>
   )
 }
@@ -92,6 +96,31 @@ function Notes({ value, onChange }: { value: string; onChange: (v: string) => vo
   )
 }
 
+// Collapsible tech-stack section. Collapsed by default so every card starts at
+// the same height (the tech grid is the biggest source of height variance);
+// expanding it grows only this card because the grid uses items-start.
+function TechSection({ tech }: { tech: Project['tech'] }) {
+  const count = Object.values(tech || {}).flat().length
+  const [open, setOpen] = useState(false)
+  return (
+    <div className="border-t border-white/10 pt-3">
+      <button
+        onClick={() => setOpen((o) => !o)}
+        className="flex items-center gap-1.5 text-[13.5px] font-semibold text-accent-cyan transition hover:text-accent-blue"
+        aria-expanded={open}
+      >
+        <span>🧩 Tech stack{count ? ` · ${count}` : ''}</span>
+        <span className="text-[11px]">{open ? '▲' : '▾'}</span>
+      </button>
+      {open && (
+        <div className="mt-2.5">
+          <TechStack tech={tech} />
+        </div>
+      )}
+    </div>
+  )
+}
+
 export default function ProjectCard({ project, tracker }: { project: Project; tracker: Tracker }) {
   const domains = domainsFor(project.tech)
   const rgb = DOMAIN_COLOR[domains[0]] ?? DOMAIN_COLOR.Other
@@ -110,7 +139,7 @@ export default function ProjectCard({ project, tracker }: { project: Project; tr
         <div className="min-w-0">
           <a href={project.url} target="_blank" rel="noreferrer" className="group inline-flex items-start gap-1.5">
             <span
-              className="font-display text-[15px] font-bold leading-snug"
+              className="line-clamp-2 min-h-[2.6rem] font-display text-[15px] font-bold leading-snug"
               style={{
                 backgroundImage: `linear-gradient(90deg, rgb(${rgb}), rgba(${rgb},0.55))`,
                 WebkitBackgroundClip: 'text',
@@ -122,24 +151,23 @@ export default function ProjectCard({ project, tracker }: { project: Project; tr
             </span>
             <span className="mt-0.5 shrink-0 text-accent-cyan opacity-0 transition group-hover:opacity-100">↗</span>
           </a>
-          {badges.length > 0 && (
-            <div className="mt-2 flex flex-wrap gap-1.5">
-              {badges.slice(0, 4).map((d) => (
-                <span
-                  key={d}
-                  className="rounded-md px-1.5 py-0.5 text-[10px] font-semibold"
-                  style={{
-                    background: `rgba(${DOMAIN_COLOR[d]},0.14)`,
-                    color: `rgb(${DOMAIN_COLOR[d]})`,
-                    boxShadow: `inset 0 0 0 1px rgba(${DOMAIN_COLOR[d]},0.3)`,
-                  }}
-                >
-                  {d}
-                </span>
-              ))}
-              {badges.length > 4 && <span className="px-1 text-[10px] font-semibold text-faint">+{badges.length - 4}</span>}
-            </div>
-          )}
+          {/* badges row height is reserved (min-h) so cards stay even even when a project has none */}
+          <div className="mt-2 flex min-h-[1.25rem] flex-wrap gap-1.5">
+            {badges.slice(0, 4).map((d) => (
+              <span
+                key={d}
+                className="rounded-md px-1.5 py-0.5 text-[10px] font-semibold"
+                style={{
+                  background: `rgba(${DOMAIN_COLOR[d]},0.14)`,
+                  color: `rgb(${DOMAIN_COLOR[d]})`,
+                  boxShadow: `inset 0 0 0 1px rgba(${DOMAIN_COLOR[d]},0.3)`,
+                }}
+              >
+                {d}
+              </span>
+            ))}
+            {badges.length > 4 && <span className="px-1 text-[10px] font-semibold text-faint">+{badges.length - 4}</span>}
+          </div>
           <Description text={project.description || 'No description on GitHub yet.'} />
         </div>
         <div className="flex shrink-0 flex-col items-end gap-1.5">
@@ -152,9 +180,9 @@ export default function ProjectCard({ project, tracker }: { project: Project; tr
         </div>
       </header>
 
-      <TechStack tech={project.tech} />
+      <TechSection tech={project.tech} />
 
-      <div className="mt-auto grid grid-cols-2 gap-2.5 border-t border-white/10 pt-4 sm:grid-cols-4">
+      <div className="grid grid-cols-2 gap-2.5 border-t border-white/10 pt-4 sm:grid-cols-4">
         {DROPDOWNS.map((def) => (
           <Pill
             key={def.key}
