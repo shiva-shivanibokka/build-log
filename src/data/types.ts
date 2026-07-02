@@ -18,13 +18,15 @@ export interface ProjectsFile {
   projects: Project[]
 }
 
-// The four manual dropdowns the user controls. Keys are stable; values are the
-// option `value` strings defined in lib/dropdowns.ts (or undefined when unset).
+// The manual fields the user controls. The first four are dropdowns whose values
+// are the option `value` strings defined in lib/dropdowns.ts; `notes` is free
+// text. All are optional (undefined when unset).
 export interface Override {
   github?: string
   linkedin?: string
   status?: string
   whatWhy?: string
+  notes?: string
 }
 
 export type Overrides = Record<string, Override>

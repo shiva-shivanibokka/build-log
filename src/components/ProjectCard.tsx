@@ -46,6 +46,52 @@ function Description({ text }: { text: string }) {
   )
 }
 
+// Collapsible free-text notes. The textarea soft-wraps so text always stays
+// within the card width, and auto-grows downward as you type. Starts open only
+// when notes already exist, so empty cards stay compact.
+function Notes({ value, onChange }: { value: string; onChange: (v: string) => void }) {
+  const [open, setOpen] = useState(!!value)
+  const ref = useRef<HTMLTextAreaElement>(null)
+
+  const grow = () => {
+    const el = ref.current
+    if (!el) return
+    el.style.height = 'auto'
+    el.style.height = `${el.scrollHeight}px`
+  }
+  useLayoutEffect(() => {
+    if (open) grow()
+  }, [open, value])
+
+  return (
+    <div className="border-t border-white/10 pt-3">
+      <button
+        onClick={() => setOpen((o) => !o)}
+        className="flex items-center gap-1.5 text-[12px] font-semibold text-accent-cyan transition hover:text-accent-blue"
+        aria-expanded={open}
+      >
+        <span>📝 Notes{!open && value ? ` · ${value.trim().split(/\s+/).length}w` : ''}</span>
+        <span className="text-[10px]">{open ? '▲' : '▾'}</span>
+      </button>
+      {open && (
+        <textarea
+          ref={ref}
+          value={value}
+          onChange={(e) => {
+            onChange(e.target.value)
+            grow()
+          }}
+          onInput={grow}
+          placeholder="Jot notes, next steps, ideas…"
+          rows={2}
+          className="mt-2 block w-full resize-none overflow-hidden whitespace-pre-wrap break-words rounded-lg border border-white/10 bg-white/[0.04] px-3 py-2 text-[13px] leading-relaxed text-subtle outline-none transition focus:border-accent-cyan/50 focus:bg-white/[0.06]"
+          style={{ wordBreak: 'break-word', overflowWrap: 'anywhere' }}
+        />
+      )}
+    </div>
+  )
+}
+
 export default function ProjectCard({ project, tracker }: { project: Project; tracker: Tracker }) {
   const domains = domainsFor(project.tech)
   const rgb = DOMAIN_COLOR[domains[0]] ?? DOMAIN_COLOR.Other
@@ -118,6 +164,11 @@ export default function ProjectCard({ project, tracker }: { project: Project; tr
           />
         ))}
       </div>
+
+      <Notes
+        value={tracker.get(project.repo, 'notes') || ''}
+        onChange={(v) => tracker.set(project.repo, 'notes', v.trim() ? v : undefined)}
+      />
     </article>
   )
 }
