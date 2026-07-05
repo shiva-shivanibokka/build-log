@@ -22,6 +22,7 @@ I build a lot of small projects, and I kept losing track of which ones were fini
 - **Zero-entry project sync** — lists every public repo I own and, for each, derives the description (repo description → README intro fallback) and a **categorized tech stack** (Frontend / Backend / Data / etc.). Create a new repo and it appears on the next sync.
 - **Automatic AI/ML domain classification** — each repo is multi-labeled into *field* domains (Agentic, LLMs & GenAI, Deep Learning, NLP, Computer Vision, MLOps, Classical ML, Data Science, SWE/Full-Stack) derived from its detected tech, and the board can be filtered by domain.
 - **Four status dropdowns I control** — GitHub posted? · LinkedIn posted? · Status (Done / In-progress / Pending / Yet-to-start / **Revamp**) · What & Why write-up status. Each is color-coded.
+- **Per-card notes & collapsible tech stack** — every project card has a collapsible **📝 Notes** textarea (auto-growing, soft-wrapping so text stays inside the card, and open automatically only when a note already exists) that persists exactly like the dropdowns, plus a collapsible **🧩 Tech stack** section (collapsed by default, showing a count). Cards are kept **even-height** — reserved heights, line-clamped titles/descriptions, and an `items-start` grid mean expanding one card grows only that card.
 - **A second "To Do" board** — a backlog of project ideas with Implemented?, Priority, Domain, Proposed tech, and Notes.
 - **Optional GitHub write-back** — paste a fine-grained token in Settings and dropdown/idea edits commit straight back to the repo (debounced); without a token, a one-click backup downloads the JSON.
 - **Live, animated dark UI** — Orbitron display type, an animated circuit-board canvas background, neon glass cards, and a per-status stat strip.
@@ -47,7 +48,7 @@ flowchart TD
 **Why this shape:**
 - **Build-time sync over a runtime API call** — the GitHub token stays in the CI secret, never shipped to the browser; the client just reads a static JSON, so it's fast and can't leak credentials.
 - **Committed JSON as the database** — `projects.json` (auto) and `overrides.json` (manual) are the entire data layer. No DB to run, and the data is diffable in git.
-- **Local-first edits with optional write-back** — dropdown changes apply instantly in `localStorage`; the optional PAT path commits them via the Contents API so they persist across devices, without ever putting a server in the loop.
+- **Local-first edits with optional write-back** — dropdown and note changes apply instantly in `localStorage`; the optional PAT path commits them via the Contents API so they persist across devices, without ever putting a server in the loop. Clearing a value that exists in the committed baseline writes an empty-string **tombstone** so the deletion actually sticks after a merge.
 
 ## Tech Stack
 
@@ -87,7 +88,7 @@ The tracked account is set in `scripts/sync-projects.mjs` (`OWNER`), which also 
 
 ## Usage
 
-- **Projects tab** — browse/search/sort all repos; filter by status or domain; set the four dropdowns per card.
+- **Projects tab** — browse/search/sort all repos; filter by status or domain; set the four dropdowns, jot per-card notes, and expand the tech stack.
 - **To Do tab** — add project ideas and set Implemented / Priority / Domain / Proposed tech / Notes.
 - **Persisting edits** — click **Save / Back up** to download the overrides JSON and commit it, *or* add a fine-grained PAT (Contents: read & write on this repo only) in **⚙ Settings** to have edits auto-commit.
 
@@ -106,10 +107,11 @@ public/
 src/
   App.tsx              # header, tabs, save/settings wiring
   components/
-    ProjectsView.tsx   # projects board: stat strip, filters, grid
-    ProjectCard.tsx    # one repo: domain badges, tech stack, dropdowns
+    ProjectsView.tsx   # projects board: stat strip, filters, even-height grid
+    ProjectCard.tsx    # one repo: domain badges, collapsible tech stack, dropdowns, notes
     TodoView.tsx       # the To-Do board
     CircuitBackground.tsx  # animated canvas background
+    usePopover.ts      # shared open/position hook behind Select + DomainSelect
     DomainSelect / Select / Pill / TechStack / StatStrip / SettingsModal
   lib/
     store.ts           # load + merge (baseline + local) + localStorage + sync
