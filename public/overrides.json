@@ -1,9 +1,12 @@
 {
   "shiva-shivanibokka.github.io": {
-    "status": "done"
+    "status": "done",
+    "github": "yes"
   },
   "Churn-Intelligence-Platform": {
-    "status": "done"
+    "status": "done",
+    "github": "yes",
+    "whatWhy": "done"
   },
   "CodePilot-Agent": {
     "status": "revamp"
@@ -81,7 +84,8 @@
     "status": "revamp"
   },
   "Fraud-Detection-System": {
-    "status": "done"
+    "status": "done",
+    "github": "yes"
   },
   "ML-Model-Efficiency-Toolkit": {
     "status": "revamp"
