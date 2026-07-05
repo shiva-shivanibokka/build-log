@@ -90,7 +90,8 @@
     "status": "yet-to-start"
   },
   "ResumeForge": {
-    "status": "done"
+    "status": "done",
+    "github": "yes"
   },
   "Search-Ranking-System": {
     "status": "in-progress"
