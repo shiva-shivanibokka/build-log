@@ -26,8 +26,9 @@
     "status": "in-progress"
   },
   "Cumida-ML-Model": {
-    "status": "in-progress",
-    "whatWhy": "done"
+    "status": "done",
+    "whatWhy": "done",
+    "github": "yes"
   },
   "Sepsis-ML-Model": {
     "status": "revamp"
@@ -82,7 +83,7 @@
     "status": "revamp"
   },
   "HireView": {
-    "status": "revamp"
+    "status": "in-progress"
   },
   "Fraud-Detection-System": {
     "status": "done",
@@ -147,7 +148,8 @@
   },
   "ML-System-Design-Retraining-Pipeline": {
     "status": "done",
-    "whatWhy": "done"
+    "whatWhy": "done",
+    "github": "yes"
   },
   "ML-System-Design-Batch-Inference": {
     "status": "revamp"
