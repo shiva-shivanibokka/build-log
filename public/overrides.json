@@ -23,7 +23,8 @@
     "status": "revamp"
   },
   "Tisch-ML-Model": {
-    "status": "in-progress"
+    "status": "done",
+    "whatWhy": "done"
   },
   "Cumida-ML-Model": {
     "status": "done",
