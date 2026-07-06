@@ -137,7 +137,7 @@
   "ML-System-Design-Recommendation-Engine": {
     "status": "done",
     "github": "yes",
-    "whatWhy": "in-progress"
+    "whatWhy": "done"
   },
   "ML-System-Design-Model-Serving": {
     "status": "in-progress"
