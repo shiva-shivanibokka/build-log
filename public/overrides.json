@@ -24,7 +24,8 @@
   },
   "Tisch-ML-Model": {
     "status": "done",
-    "whatWhy": "done"
+    "whatWhy": "done",
+    "github": "yes"
   },
   "Cumida-ML-Model": {
     "status": "done",
@@ -32,7 +33,7 @@
     "github": "yes"
   },
   "Sepsis-ML-Model": {
-    "status": "revamp"
+    "status": "in-progress"
   },
   "RAG-vs-CAG-Showdown": {
     "status": "done",
