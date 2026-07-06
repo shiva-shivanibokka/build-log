@@ -85,7 +85,8 @@
   },
   "Fraud-Detection-System": {
     "status": "done",
-    "github": "yes"
+    "github": "yes",
+    "whatWhy": "done"
   },
   "ML-Model-Efficiency-Toolkit": {
     "status": "revamp"
