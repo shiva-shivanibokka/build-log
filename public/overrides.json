@@ -129,8 +129,7 @@
   },
   "Transfer-Learning-HuggingFace": {
     "status": "done",
-    "github": "yes",
-    "whatWhy": "done"
+    "github": "yes"
   },
   "Dive-Deeper-into-Unsupervised-Learning": {
     "status": "yet-to-start"
