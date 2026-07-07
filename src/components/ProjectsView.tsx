@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import type { Tracker } from '../lib/store'
+import type { Project } from '../data/types'
 import { DROPDOWNS, optionFor, toneDot } from '../lib/dropdowns'
 import { domainsFor, DOMAIN_COLOR } from '../lib/domains'
 import ProjectCard from './ProjectCard'
@@ -16,50 +17,79 @@ export default function ProjectsView({ tracker }: { tracker: Tracker }) {
   const [domainFilter, setDomainFilter] = useState<string>('all')
   const [sort, setSort] = useState<SortKey>('recent')
 
-  // counts per status value (+ "unset") for the summary chips
-  const counts = useMemo(() => {
-    const c: Record<string, number> = { unset: 0 }
-    for (const o of STATUS_DEF.options) c[o.value] = 0
-    for (const p of projects) {
-      const v = get(p.repo, 'status')
-      c[v ?? 'unset'] = (c[v ?? 'unset'] ?? 0) + 1
-    }
-    return c
-  }, [projects, get])
-
-  // each project's domains (multi-label) + counts for the filter
+  // each project's domains (multi-label), used by both the grid and the chip counts
   const domainsOf = useMemo(() => {
     const m: Record<string, string[]> = {}
     for (const p of projects) m[p.repo] = domainsFor(p.tech)
     return m
   }, [projects])
 
-  const domains = useMemo(() => {
+  // One predicate per filter dimension. Status and Domain stack together (AND),
+  // but each dimension's chip counts are computed from the OTHER active dimensions
+  // only (never its own selection) — so the number on a chip always equals how many
+  // cards you actually get when you click it.
+  const needle = q.trim().toLowerCase()
+  const matchesSearch = (p: Project) => {
+    if (!needle) return true
+    const hay = [p.name, p.repo, p.description, ...Object.values(p.tech || {}).flat()]
+      .join(' ')
+      .toLowerCase()
+    return hay.includes(needle)
+  }
+  const matchesStatus = (p: Project) => {
+    if (statusFilter === 'all') return true
+    const v = get(p.repo, 'status')
+    return statusFilter === 'unset' ? v != null : v === statusFilter
+  }
+  const matchesDomain = (p: Project) =>
+    domainFilter === 'all' || domainsOf[p.repo].includes(domainFilter)
+
+  // Status counts reflect the active Domain + search (but not the Status selection).
+  const counts = useMemo(() => {
+    const c: Record<string, number> = { unset: 0 }
+    for (const o of STATUS_DEF.options) c[o.value] = 0
+    for (const p of projects) {
+      if (!matchesDomain(p) || !matchesSearch(p)) continue
+      const v = get(p.repo, 'status')
+      c[v ?? 'unset'] = (c[v ?? 'unset'] ?? 0) + 1
+    }
+    return c
+  }, [projects, get, domainFilter, domainsOf, needle])
+  const statusAllCount = useMemo(
+    () => projects.filter((p) => matchesDomain(p) && matchesSearch(p)).length,
+    [projects, domainFilter, domainsOf, needle],
+  )
+
+  // Stable domain order (by global frequency) so the chips don't reshuffle as you
+  // filter; the number next to each is the contextual count below.
+  const domainOrder = useMemo(() => {
     const c: Record<string, number> = {}
     for (const p of projects) for (const d of domainsOf[p.repo]) c[d] = (c[d] || 0) + 1
-    return Object.entries(c).sort((a, b) => b[1] - a[1])
+    return Object.entries(c)
+      .sort((a, b) => b[1] - a[1])
+      .map(([d]) => d)
   }, [projects, domainsOf])
+  // Domain counts reflect the active Status + search (but not the Domain selection).
+  const domainCounts = useMemo(() => {
+    const c: Record<string, number> = {}
+    for (const p of projects) {
+      if (!matchesStatus(p) || !matchesSearch(p)) continue
+      for (const d of domainsOf[p.repo]) c[d] = (c[d] || 0) + 1
+    }
+    return c
+  }, [projects, domainsOf, statusFilter, get, needle])
+  const domainAllCount = useMemo(
+    () => projects.filter((p) => matchesStatus(p) && matchesSearch(p)).length,
+    [projects, statusFilter, get, needle],
+  )
 
   const visible = useMemo(() => {
-    const needle = q.trim().toLowerCase()
-    let list = projects.filter((p) => {
-      if (statusFilter !== 'all') {
-        const v = get(p.repo, 'status')
-        if (statusFilter === 'unset' ? v != null : v !== statusFilter) return false
-      }
-      if (domainFilter !== 'all' && !domainsOf[p.repo].includes(domainFilter)) return false
-      if (!needle) return true
-      const hay = [p.name, p.repo, p.description, ...Object.values(p.tech || {}).flat()]
-        .join(' ')
-        .toLowerCase()
-      return hay.includes(needle)
-    })
-    list = [...list].sort((a, b) =>
+    const list = projects.filter((p) => matchesStatus(p) && matchesDomain(p) && matchesSearch(p))
+    return [...list].sort((a, b) =>
       sort === 'name'
         ? a.name.localeCompare(b.name)
         : (b.pushedAt || '').localeCompare(a.pushedAt || ''),
     )
-    return list
   }, [projects, q, statusFilter, domainFilter, domainsOf, sort, get])
 
   return (
@@ -72,7 +102,7 @@ export default function ProjectsView({ tracker }: { tracker: Tracker }) {
         <Chip
           active={statusFilter === 'all'}
           label="All"
-          count={projects.length}
+          count={statusAllCount}
           dot="bg-slate-400"
           onClick={() => setStatusFilter('all')}
         />
@@ -98,13 +128,13 @@ export default function ProjectsView({ tracker }: { tracker: Tracker }) {
       {/* domain filter (colours match each card's stripe/title) */}
       <div className="mt-2.5 flex flex-wrap items-center gap-2">
         <span className="mr-1 font-mono text-[13px] font-bold uppercase tracking-wide text-faint">Domain</span>
-        <DomainChip active={domainFilter === 'all'} label="All" count={projects.length} rgb="148,163,184" onClick={() => setDomainFilter('all')} />
-        {domains.map(([d, n]) => (
+        <DomainChip active={domainFilter === 'all'} label="All" count={domainAllCount} rgb="148,163,184" onClick={() => setDomainFilter('all')} />
+        {domainOrder.map((d) => (
           <DomainChip
             key={d}
             active={domainFilter === d}
             label={d}
-            count={n}
+            count={domainCounts[d] ?? 0}
             rgb={DOMAIN_COLOR[d] ?? '148,163,184'}
             onClick={() => setDomainFilter(d)}
           />
