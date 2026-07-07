@@ -33,8 +33,9 @@
     "github": "yes"
   },
   "Sepsis-ML-Model": {
-    "status": "in-progress",
-    "whatWhy": "done"
+    "status": "done",
+    "whatWhy": "done",
+    "github": "yes"
   },
   "RAG-vs-CAG-Showdown": {
     "status": "done",
@@ -127,7 +128,8 @@
     "status": "yet-to-start"
   },
   "Transfer-Learning-HuggingFace": {
-    "status": "in-progress"
+    "status": "in-progress",
+    "github": "yes"
   },
   "Dive-Deeper-into-Unsupervised-Learning": {
     "status": "yet-to-start"
