@@ -129,7 +129,8 @@
   },
   "Transfer-Learning-HuggingFace": {
     "status": "done",
-    "github": "yes"
+    "github": "yes",
+    "whatWhy": "done"
   },
   "Dive-Deeper-into-Unsupervised-Learning": {
     "status": "yet-to-start"
@@ -141,7 +142,7 @@
     "status": "yet-to-start"
   },
   "Gradient-Descent-and-Optimizers": {
-    "status": "revamp"
+    "status": "in-progress"
   },
   "ML-System-Design-Recommendation-Engine": {
     "status": "done",
