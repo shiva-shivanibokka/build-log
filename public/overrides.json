@@ -144,7 +144,9 @@
     "status": "yet-to-start"
   },
   "Gradient-Descent-and-Optimizers": {
-    "status": "in-progress"
+    "status": "in-progress",
+    "whatWhy": "done",
+    "github": "yes"
   },
   "ML-System-Design-Recommendation-Engine": {
     "status": "done",
