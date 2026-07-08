@@ -58,7 +58,8 @@
     "status": "revamp"
   },
   "Competitor-Insight-Engine": {
-    "status": "in-progress"
+    "status": "in-progress",
+    "whatWhy": "done"
   },
   "All-About-Cross-Validation": {
     "status": "revamp"
