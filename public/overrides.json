@@ -20,7 +20,8 @@
     "status": "revamp"
   },
   "Basics-of-Linear-and-Logistic-Regression": {
-    "status": "in-progress"
+    "status": "done",
+    "whatWhy": "done"
   },
   "Tisch-ML-Model": {
     "status": "done",
