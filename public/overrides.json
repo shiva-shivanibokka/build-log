@@ -44,7 +44,7 @@
     "whatWhy": "done"
   },
   "Multi-Horizon-Stock-Forecasting-AI-Model": {
-    "status": "revamp"
+    "status": "in-progress"
   },
   "Supply-Chain-Demand-Agent": {
     "status": "revamp"
@@ -144,7 +144,7 @@
     "status": "yet-to-start"
   },
   "Gradient-Descent-and-Optimizers": {
-    "status": "in-progress",
+    "status": "done",
     "whatWhy": "done",
     "github": "yes"
   },
