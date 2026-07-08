@@ -48,7 +48,7 @@
     "status": "in-progress"
   },
   "Supply-Chain-Demand-Agent": {
-    "status": "revamp"
+    "status": "in-progress"
   },
   "Core-algorithms-for-Leetcode": {
     "status": "revamp",
@@ -144,7 +144,7 @@
     "status": "yet-to-start"
   },
   "Dive-Deeper-into-Deep-Learning": {
-    "status": "yet-to-start"
+    "status": "in-progress"
   },
   "Gradient-Descent-and-Optimizers": {
     "status": "done",
