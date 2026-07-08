@@ -107,7 +107,7 @@
     "notes": "It has been paused on HF because of the free tier limits, so that another model can be hosted there."
   },
   "Search-Ranking-System": {
-    "status": "in-progress",
+    "status": "done",
     "whatWhy": "done",
     "github": "yes"
   },
