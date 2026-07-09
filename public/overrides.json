@@ -45,7 +45,9 @@
     "whatWhy": "done"
   },
   "Multi-Horizon-Stock-Forecasting-AI-Model": {
-    "status": "in-progress"
+    "status": "in-progress",
+    "github": "yes",
+    "whatWhy": "done"
   },
   "Supply-Chain-Demand-Agent": {
     "status": "in-progress"
