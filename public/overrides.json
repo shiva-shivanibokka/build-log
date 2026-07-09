@@ -50,7 +50,9 @@
     "whatWhy": "done"
   },
   "Supply-Chain-Demand-Agent": {
-    "status": "in-progress"
+    "status": "done",
+    "whatWhy": "done",
+    "github": "yes"
   },
   "Core-algorithms-for-Leetcode": {
     "status": "revamp",
