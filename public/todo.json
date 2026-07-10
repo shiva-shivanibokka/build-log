@@ -1,1 +1,10 @@
-[]
+[
+  {
+    "id": "8cddc761-289d-4664-a19a-49fa7545d30e",
+    "title": "",
+    "implemented": "no",
+    "priority": "medium",
+    "createdAt": "2026-07-01T00:13:06.927Z",
+    "domain": "Computer Vision"
+  }
+]
