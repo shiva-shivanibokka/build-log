@@ -142,7 +142,9 @@
     "whatWhy": "done"
   },
   "Dive-Deeper-into-Unsupervised-Learning": {
-    "status": "in-progress"
+    "status": "in-progress",
+    "whatWhy": "done",
+    "github": "yes"
   },
   "Dive-Deeper-into-Supervised-Learning": {
     "status": "done",
