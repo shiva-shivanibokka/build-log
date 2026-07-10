@@ -142,7 +142,7 @@
     "whatWhy": "done"
   },
   "Dive-Deeper-into-Unsupervised-Learning": {
-    "status": "in-progress",
+    "status": "done",
     "whatWhy": "done",
     "github": "yes"
   },
@@ -185,7 +185,7 @@
     "status": "revamp"
   },
   "Autonomous-ML-Pipeline-Builder": {
-    "status": "revamp"
+    "status": "yet-to-start"
   },
   "Autonomous-SWE-Agent": {
     "status": "yet-to-start"
