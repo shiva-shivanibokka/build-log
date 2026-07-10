@@ -119,7 +119,8 @@
     "github": "yes"
   },
   "Fine-Tuned-Domain-LLM-QLoRA": {
-    "status": "in-progress"
+    "status": "in-progress",
+    "notes": "Did not connect to HF spaces because it requires a pro subscription to host model-serving spaces. we can come back to it later. it costs $9 a month."
   },
   "Multimodal-RAG": {
     "status": "yet-to-start"
