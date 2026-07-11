@@ -21,7 +21,8 @@
   },
   "Basics-of-Linear-and-Logistic-Regression": {
     "status": "done",
-    "whatWhy": "done"
+    "whatWhy": "done",
+    "github": "yes"
   },
   "Tisch-ML-Model": {
     "status": "done",
