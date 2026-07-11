@@ -88,7 +88,9 @@
     "github": "yes"
   },
   "Games-built-using-Python": {
-    "status": "in-progress"
+    "status": "done",
+    "whatWhy": "done",
+    "github": "yes"
   },
   "PrepGap-Lens": {
     "status": "yet-to-start"
