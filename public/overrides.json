@@ -59,7 +59,8 @@
   },
   "Core-algorithms-for-Leetcode": {
     "status": "revamp",
-    "github": "yes"
+    "github": "yes",
+    "whatWhy": "done"
   },
   "Dive-deeper-into-linear-models": {
     "status": "revamp"
@@ -82,7 +83,7 @@
     "status": "revamp"
   },
   "All-about-Neural-Networks": {
-    "status": "in-progress",
+    "status": "done",
     "whatWhy": "done",
     "github": "yes"
   },
