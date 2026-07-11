@@ -74,7 +74,7 @@
     "status": "revamp"
   },
   "LLM-Halucination-Detection": {
-    "status": "revamp"
+    "status": "in-progress"
   },
   "AutoGrader-Agent": {
     "status": "revamp"
@@ -211,7 +211,7 @@
     "github": "yes"
   },
   "LLM-research-scraper": {
-    "status": "in-progress",
+    "status": "done",
     "whatWhy": "done",
     "github": "yes"
   },
