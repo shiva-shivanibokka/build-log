@@ -119,8 +119,8 @@
     "github": "yes"
   },
   "Fine-Tuned-Domain-LLM-QLoRA": {
-    "status": "in-progress",
-    "notes": "Did not connect to HF spaces because it requires a pro subscription to host model-serving spaces. we can come back to it later. it costs $9 a month. But ",
+    "status": "done",
+    "notes": "Did not connect to HF spaces because it requires a pro subscription to host model-serving spaces. we can come back to it later. it costs $9 a month. But found a replacement in Modal instead.",
     "whatWhy": "done",
     "github": "yes"
   },
