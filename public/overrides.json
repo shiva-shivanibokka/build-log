@@ -58,7 +58,7 @@
     "github": "yes"
   },
   "Core-algorithms-for-Leetcode": {
-    "status": "revamp",
+    "status": "done",
     "github": "yes",
     "whatWhy": "done"
   },
@@ -204,7 +204,9 @@
     "status": "yet-to-start"
   },
   "Data-Analytics-Portfolio": {
-    "status": "in-progress"
+    "status": "in-progress",
+    "whatWhy": "done",
+    "github": "yes"
   },
   "LLM-research-scraper": {
     "status": "in-progress"
