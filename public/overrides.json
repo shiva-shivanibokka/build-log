@@ -135,7 +135,9 @@
     "status": "yet-to-start"
   },
   "NLP-Pipeline-at-Scale": {
-    "status": "in-progress"
+    "status": "done",
+    "whatWhy": "done",
+    "github": "yes"
   },
   "Federated-Learning-Simulation": {
     "status": "yet-to-start"
