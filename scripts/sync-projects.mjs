@@ -1,5 +1,5 @@
 // Build-time GitHub sync. Lists the owner's public repos and derives, for each:
-//   - name + description (repo description, falling back to the README intro)
+//   - name + description (README intro, falling back to the repo About field)
 //   - a categorized tech stack (languages + dependency manifests + README scan)
 // Writes public/projects.json, which the dashboard reads. The four status
 // dropdowns are NOT touched here — those live in public/overrides.json.
@@ -178,7 +178,10 @@ async function enrich(repo, project, tech) {
   const readme = await gh(`/repos/${OWNER}/${repo.name}/readme`)
   if (readme?.content) {
     const md = Buffer.from(readme.content, 'base64').toString('utf8')
-    if (!project.description) project.description = readmeIntro(md)
+    // README intro is the source of truth; fall back to the GitHub About field
+    // (set in main()) only when the README has no usable intro paragraph.
+    const intro = readmeIntro(md)
+    if (intro) project.description = intro
     scanKeywords(md, tech)
   }
 

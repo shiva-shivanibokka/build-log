@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useLayoutEffect, useMemo, useRef, useState } from 'react'
 import type { Tone } from '../lib/dropdowns'
 import Select from './Select'
 import DomainSelect from './DomainSelect'
@@ -160,16 +160,14 @@ export default function TodoView({ tokenOn }: { tokenOn: boolean }) {
         </div>
       ) : (
         <div className="overflow-x-auto rounded-2xl border border-white/10 bg-white/[0.03] shadow-card backdrop-blur-md">
-          <table className="w-full min-w-[1120px] border-collapse text-left">
+          <table className="w-full min-w-[760px] border-collapse text-left">
             <thead>
               <tr className="border-b border-white/10 font-mono text-[12px] font-bold uppercase tracking-wide text-faint">
-                <Th className="w-[24%] pl-5">Idea</Th>
+                <Th className="w-[34%] pl-5">Idea</Th>
                 <Th>Domain</Th>
                 <Th>Priority</Th>
                 <Th>Built?</Th>
                 <Th>Target</Th>
-                <Th className="w-[13%]">Proposed tech</Th>
-                <Th className="w-[15%]">Notes</Th>
                 <Th className="pr-3" />
               </tr>
             </thead>
@@ -239,92 +237,157 @@ function Row({
 }) {
   const built = todo.implemented === 'yes'
   const overdue = !!todo.target && !built && todo.target < todayStr
+  const rowTint = built ? 'opacity-55' : ''
 
   return (
-    <tr className={`border-b border-white/5 align-top last:border-0 hover:bg-white/[0.03] ${built ? 'opacity-55' : ''}`}>
-      <td className="py-3 pl-5 pr-2">
-        <div className="flex items-center gap-1.5">
+    <>
+      {/* main row: idea, domain, priority, built, target */}
+      <tr className={`align-top hover:bg-white/[0.03] ${rowTint}`}>
+        <td className="py-3 pl-5 pr-2">
+          <div className="flex items-center gap-1.5">
+            <input
+              value={todo.title}
+              onChange={(e) => update(todo.id, { title: e.target.value })}
+              placeholder="What do you want to build?"
+              className={`w-full bg-transparent text-[14.5px] font-semibold text-ink placeholder:font-normal placeholder:text-faint focus:outline-none ${built ? 'line-through' : ''}`}
+            />
+            {todo.repo && (
+              <a
+                href={`https://github.com/${OWNER}/${todo.repo}`}
+                target="_blank"
+                rel="noreferrer"
+                title={`Open ${todo.repo} on GitHub`}
+                className="shrink-0 rounded-md bg-white/5 px-1.5 py-0.5 text-[11px] font-semibold text-accent-cyan ring-1 ring-white/10 transition hover:bg-white/10"
+              >
+                ↗ repo
+              </a>
+            )}
+          </div>
           <input
-            value={todo.title}
-            onChange={(e) => update(todo.id, { title: e.target.value })}
-            placeholder="What do you want to build?"
-            className={`w-full bg-transparent text-[14.5px] font-semibold text-ink placeholder:font-normal placeholder:text-faint focus:outline-none ${built ? 'line-through' : ''}`}
+            value={todo.repo ?? ''}
+            onChange={(e) => update(todo.id, { repo: e.target.value })}
+            placeholder="+ link built repo (name)"
+            className="mt-1 w-full rounded bg-transparent px-0 text-[12.5px] text-faint outline-none placeholder:text-faint/60 focus:text-subtle"
           />
-          {todo.repo && (
-            <a
-              href={`https://github.com/${OWNER}/${todo.repo}`}
-              target="_blank"
-              rel="noreferrer"
-              title={`Open ${todo.repo} on GitHub`}
-              className="shrink-0 rounded-md bg-white/5 px-1.5 py-0.5 text-[11px] font-semibold text-accent-cyan ring-1 ring-white/10 transition hover:bg-white/10"
-            >
-              ↗ repo
-            </a>
-          )}
-        </div>
-        <input
-          value={todo.repo ?? ''}
-          onChange={(e) => update(todo.id, { repo: e.target.value })}
-          placeholder="+ link built repo (name)"
-          className="mt-1 w-full rounded bg-transparent px-0 text-[12.5px] text-faint outline-none placeholder:text-faint/60 focus:text-subtle"
-        />
-      </td>
-      <td className="px-2 py-3">
-        <DomainSelect value={todo.domain} onChange={(v) => update(todo.id, { domain: v })} />
-      </td>
-      <td className="px-2 py-3">
-        <Select value={todo.priority} options={PRIORITY} onChange={(v) => update(todo.id, { priority: v })} ariaLabel="Priority" placeholder="—" />
-      </td>
-      <td className="px-2 py-3">
-        <Select value={todo.implemented} options={IMPLEMENTED} onChange={(v) => update(todo.id, { implemented: v })} ariaLabel="Built" placeholder="—" />
-      </td>
-      <td className="px-2 py-3">
-        <input
-          type="date"
-          value={todo.target ?? ''}
-          onChange={(e) => update(todo.id, { target: e.target.value })}
-          className={`rounded-md border border-transparent bg-transparent px-1.5 py-1 text-[13.5px] outline-none transition [color-scheme:dark] hover:border-white/15 focus:border-accent-cyan ${
-            overdue ? 'text-rose-300' : 'text-subtle'
-          }`}
-          title={overdue ? 'Overdue' : undefined}
-        />
-      </td>
-      <td className="px-2 py-3">
-        <CellInput value={todo.tech} onChange={(v) => update(todo.id, { tech: v })} placeholder="React, FastAPI…" />
-      </td>
-      <td className="px-2 py-3">
-        <CellInput value={todo.notes} onChange={(v) => update(todo.id, { notes: v })} placeholder="—" />
-      </td>
-      <td className="py-3 pr-3 text-right">
-        <button
-          onClick={() => remove(todo.id)}
-          className="rounded-lg px-2 py-1 text-[13px] text-faint transition hover:bg-rose-500/15 hover:text-rose-300"
-          title="Delete idea"
-          aria-label="Delete idea"
-        >
-          ✕
-        </button>
-      </td>
-    </tr>
+        </td>
+        <td className="px-2 py-3">
+          <DomainSelect value={todo.domain} onChange={(v) => update(todo.id, { domain: v })} />
+        </td>
+        <td className="px-2 py-3">
+          <Select value={todo.priority} options={PRIORITY} onChange={(v) => update(todo.id, { priority: v })} ariaLabel="Priority" placeholder="—" />
+        </td>
+        <td className="px-2 py-3">
+          <Select value={todo.implemented} options={IMPLEMENTED} onChange={(v) => update(todo.id, { implemented: v })} ariaLabel="Built" placeholder="—" />
+        </td>
+        <td className="px-2 py-3">
+          <input
+            type="date"
+            value={todo.target ?? ''}
+            onChange={(e) => update(todo.id, { target: e.target.value })}
+            className={`rounded-md border border-transparent bg-transparent px-1.5 py-1 text-[13.5px] outline-none transition [color-scheme:dark] hover:border-white/15 focus:border-accent-cyan ${
+              overdue ? 'text-rose-300' : 'text-subtle'
+            }`}
+            title={overdue ? 'Overdue' : undefined}
+          />
+        </td>
+        <td className="py-3 pr-3 text-right">
+          <button
+            onClick={() => remove(todo.id)}
+            className="rounded-lg px-2 py-1 text-[13px] text-faint transition hover:bg-rose-500/15 hover:text-rose-300"
+            title="Delete idea"
+            aria-label="Delete idea"
+          >
+            ✕
+          </button>
+        </td>
+      </tr>
+      {/* detail row: full-width collapsible tech + notes, text wraps and stays visible */}
+      <tr className={`border-b border-white/5 last:border-0 hover:bg-white/[0.03] ${rowTint}`}>
+        <td colSpan={6} className="px-5 pb-4 pt-0">
+          <div className="flex flex-col gap-3 rounded-xl border border-white/[0.06] bg-white/[0.02] p-3">
+            <Foldable
+              icon="🧩"
+              label="Proposed tech"
+              value={todo.tech}
+              onChange={(v) => update(todo.id, { tech: v })}
+              placeholder="React, FastAPI, Postgres…"
+            />
+            <div className="border-t border-white/[0.06] pt-3">
+              <Foldable
+                icon="📝"
+                label="Notes"
+                value={todo.notes}
+                onChange={(v) => update(todo.id, { notes: v })}
+                placeholder="Jot notes, next steps, ideas…"
+              />
+            </div>
+          </div>
+        </td>
+      </tr>
+    </>
   )
 }
 
-function CellInput({
+// Collapsible free-text field. Mirrors the Projects-tab notes: soft-wrapping,
+// auto-growing textarea so the whole entry is visible at once — no horizontal
+// scroll. Starts open when it already has content, so empty ideas stay compact.
+function Foldable({
+  icon,
+  label,
   value,
   onChange,
   placeholder,
 }: {
+  icon: string
+  label: string
   value: string | undefined
   onChange: (v: string) => void
   placeholder?: string
 }) {
+  const [open, setOpen] = useState(!!value)
+  const ref = useRef<HTMLTextAreaElement>(null)
+
+  const grow = () => {
+    const el = ref.current
+    if (!el) return
+    el.style.height = 'auto'
+    el.style.height = `${el.scrollHeight}px`
+  }
+  useLayoutEffect(() => {
+    if (open) grow()
+  }, [open, value])
+
+  const words = value?.trim() ? value.trim().split(/\s+/).length : 0
+
   return (
-    <input
-      value={value ?? ''}
-      onChange={(e) => onChange(e.target.value)}
-      placeholder={placeholder}
-      className="w-full rounded-md border border-transparent bg-transparent px-1.5 py-1 text-[13.5px] text-subtle transition placeholder:text-faint/70 hover:border-white/15 focus:border-accent-cyan focus:bg-white/5 focus:text-ink focus:outline-none"
-    />
+    <div>
+      <button
+        onClick={() => setOpen((o) => !o)}
+        className="flex items-center gap-1.5 text-[13px] font-semibold text-accent-cyan transition hover:text-accent-blue"
+        aria-expanded={open}
+      >
+        <span>
+          {icon} {label}
+          {!open && words ? ` · ${words}w` : ''}
+        </span>
+        <span className="text-[11px]">{open ? '▲' : '▾'}</span>
+      </button>
+      {open && (
+        <textarea
+          ref={ref}
+          value={value ?? ''}
+          onChange={(e) => {
+            onChange(e.target.value)
+            grow()
+          }}
+          onInput={grow}
+          placeholder={placeholder}
+          rows={2}
+          className="mt-2 block w-full resize-none overflow-hidden whitespace-pre-wrap break-words rounded-lg border border-white/10 bg-white/[0.04] px-3 py-2 text-[13px] leading-relaxed text-subtle outline-none transition focus:border-accent-cyan/50 focus:bg-white/[0.06]"
+          style={{ wordBreak: 'break-word', overflowWrap: 'anywhere' }}
+        />
+      )}
+    </div>
   )
 }
 

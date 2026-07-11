@@ -168,7 +168,7 @@ export default function ProjectCard({ project, tracker }: { project: Project; tr
             ))}
             {badges.length > 4 && <span className="px-1 text-[10px] font-semibold text-faint">+{badges.length - 4}</span>}
           </div>
-          <Description text={project.description || 'No description on GitHub yet.'} />
+          <Description text={project.description || '🚧 Work in progress — README coming soon.'} />
         </div>
         <div className="flex shrink-0 flex-col items-end gap-1.5">
           {project.stars > 0 && (
