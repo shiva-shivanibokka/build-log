@@ -1,10 +1,18 @@
 [
   {
-    "id": "8cddc761-289d-4664-a19a-49fa7545d30e",
+    "id": "e48981d5-3878-4cec-92a2-508955f55c2b",
     "title": "",
     "implemented": "no",
     "priority": "medium",
+    "createdAt": "2026-07-11T01:52:38.356Z"
+  },
+  {
+    "id": "8cddc761-289d-4664-a19a-49fa7545d30e",
+    "title": "face recognition system",
+    "implemented": "no",
+    "priority": "low",
     "createdAt": "2026-07-01T00:13:06.927Z",
-    "domain": "Computer Vision"
+    "domain": "Computer Vision",
+    "notes": "I already have one CV project. I want to understand how deep learning is used in facial recognition"
   }
 ]
