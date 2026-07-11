@@ -82,7 +82,9 @@
     "status": "revamp"
   },
   "All-about-Neural-Networks": {
-    "status": "in-progress"
+    "status": "in-progress",
+    "whatWhy": "done",
+    "github": "yes"
   },
   "Games-built-using-Python": {
     "status": "yet-to-start"
