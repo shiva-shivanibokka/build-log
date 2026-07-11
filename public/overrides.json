@@ -17,7 +17,7 @@
     "github": "yes"
   },
   "Data-Preprocessing": {
-    "status": "in-progress",
+    "status": "done",
     "whatWhy": "done",
     "github": "yes"
   },
@@ -201,7 +201,7 @@
     "status": "yet-to-start"
   },
   "Data-Analytics-Portfolio": {
-    "status": "yet-to-start"
+    "status": "in-progress"
   },
   "LLM-research-scraper": {
     "status": "yet-to-start"
