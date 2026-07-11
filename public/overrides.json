@@ -211,7 +211,9 @@
     "github": "yes"
   },
   "LLM-research-scraper": {
-    "status": "in-progress"
+    "status": "in-progress",
+    "whatWhy": "done",
+    "github": "yes"
   },
   "take-home-project": {
     "github": "yes",
