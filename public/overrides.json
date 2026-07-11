@@ -17,7 +17,9 @@
     "github": "yes"
   },
   "Data-Preprocessing": {
-    "status": "in-progress"
+    "status": "in-progress",
+    "whatWhy": "done",
+    "github": "yes"
   },
   "Basics-of-Linear-and-Logistic-Regression": {
     "status": "done",
