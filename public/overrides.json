@@ -71,7 +71,7 @@
     "github": "yes"
   },
   "All-About-Cross-Validation": {
-    "status": "revamp"
+    "status": "in-progress"
   },
   "LLM-Halucination-Detection": {
     "status": "in-progress"
@@ -147,7 +147,7 @@
     "github": "yes"
   },
   "Federated-Learning-Simulation": {
-    "status": "yet-to-start"
+    "status": "in-progress"
   },
   "Transfer-Learning-HuggingFace": {
     "status": "done",
