@@ -102,7 +102,10 @@
     "github": "yes"
   },
   "PrepGap-Lens": {
-    "status": "yet-to-start"
+    "status": "pending",
+    "whatWhy": "done",
+    "github": "yes",
+    "notes": "test it with a paid API key."
   },
   "Super_Resolution_using_HAN": {
     "status": "revamp"
