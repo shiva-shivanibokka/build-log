@@ -125,7 +125,8 @@
     "status": "revamp"
   },
   "RecSys-Design": {
-    "status": "yet-to-start"
+    "status": "yet-to-start",
+    "notes": "This repo is empty and it looks like another recommendation system we built. So no need to do this project for now."
   },
   "ResumeForge": {
     "status": "done",
