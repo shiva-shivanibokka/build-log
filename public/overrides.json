@@ -192,9 +192,7 @@
     "whatWhy": "done"
   },
   "ML-System-Design-Model-Serving": {
-    "status": "in-progress",
-    "whatWhy": "done",
-    "github": "yes"
+    "status": "in-progress"
   },
   "ML-System-Design-Retraining-Pipeline": {
     "status": "done",
@@ -205,7 +203,9 @@
     "status": "revamp"
   },
   "ML-System-Design-Feature-Store": {
-    "status": "in-progress"
+    "status": "done",
+    "whatWhy": "done",
+    "github": "yes"
   },
   "SQL-and-Database-Skills": {
     "status": "in-progress"
