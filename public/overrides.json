@@ -77,8 +77,9 @@
   },
   "LLM-Halucination-Detection": {
     "status": "in-progress",
-    "notes": "I am not happy with this project yet. I did not do a proper testing because of lack of LLM resources. There is no recorded ",
-    "github": "yes"
+    "notes": "I am not happy with this project yet. I did not do a proper testing because of lack of LLM resources. There is no recorded RAGTruth result which is the biggest flaw.",
+    "github": "yes",
+    "whatWhy": "done"
   },
   "AutoGrader-Agent": {
     "status": "revamp"
