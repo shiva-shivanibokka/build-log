@@ -230,5 +230,10 @@
   },
   "mission-frontier": {
     "status": "done"
+  },
+  "llm-hallucination-detection": {
+    "status": "pending",
+    "whatWhy": "done",
+    "github": "yes"
   }
 }
