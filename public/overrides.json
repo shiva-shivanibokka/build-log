@@ -76,7 +76,7 @@
     "github": "yes"
   },
   "LLM-Halucination-Detection": {
-    "status": "done",
+    "status": "pending",
     "notes": "I am not happy with this project yet. I did not do a proper testing because of lack of LLM resources. There is no recorded RAGTruth result which is the biggest flaw.",
     "github": "yes",
     "whatWhy": "done"
