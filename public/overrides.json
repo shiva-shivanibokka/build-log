@@ -197,7 +197,8 @@
     "status": "in-progress"
   },
   "Autonomous-Research-Report-Agent": {
-    "status": "revamp"
+    "status": "revamp",
+    "notes": "This feels the same as LLM research scraper. check before you even tough it."
   },
   "Autonomous-ML-Pipeline-Builder": {
     "status": "yet-to-start"
