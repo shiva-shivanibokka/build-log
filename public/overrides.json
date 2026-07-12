@@ -63,7 +63,9 @@
     "whatWhy": "done"
   },
   "Dive-deeper-into-linear-models": {
-    "status": "in-progress"
+    "status": "done",
+    "github": "yes",
+    "whatWhy": "done"
   },
   "Competitor-Insight-Engine": {
     "status": "done",
