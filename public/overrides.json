@@ -71,7 +71,9 @@
     "github": "yes"
   },
   "All-About-Cross-Validation": {
-    "status": "in-progress"
+    "status": "done",
+    "whatWhy": "done",
+    "github": "yes"
   },
   "LLM-Halucination-Detection": {
     "status": "in-progress"
