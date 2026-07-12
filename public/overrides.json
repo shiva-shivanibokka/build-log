@@ -163,7 +163,8 @@
     "github": "yes"
   },
   "Federated-Learning-Simulation": {
-    "status": "in-progress"
+    "status": "in-progress",
+    "github": "yes"
   },
   "Transfer-Learning-HuggingFace": {
     "status": "done",
