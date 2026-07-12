@@ -87,7 +87,9 @@
     "status": "revamp"
   },
   "open-source-LLMs-api-wrapper": {
-    "status": "in-progress"
+    "status": "in-progress",
+    "whatWhy": "done",
+    "github": "yes"
   },
   "All-about-Neural-Networks": {
     "status": "done",
