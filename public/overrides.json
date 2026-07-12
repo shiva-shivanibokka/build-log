@@ -76,7 +76,7 @@
     "github": "yes"
   },
   "LLM-Halucination-Detection": {
-    "status": "in-progress",
+    "status": "done",
     "notes": "I am not happy with this project yet. I did not do a proper testing because of lack of LLM resources. There is no recorded RAGTruth result which is the biggest flaw.",
     "github": "yes",
     "whatWhy": "done"
@@ -138,7 +138,8 @@
     "github": "yes"
   },
   "Multimodal-RAG": {
-    "status": "in-progress"
+    "status": "in-progress",
+    "github": "yes"
   },
   "Computer-Vision-MLOps-Pipeline": {
     "status": "yet-to-start"
