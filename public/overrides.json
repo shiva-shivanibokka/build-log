@@ -77,7 +77,8 @@
   },
   "LLM-Halucination-Detection": {
     "status": "in-progress",
-    "notes": "I am not happy with this project yet."
+    "notes": "I am not happy with this project yet. I did not do a proper testing because of lack of LLM resources. There is no recorded ",
+    "github": "yes"
   },
   "AutoGrader-Agent": {
     "status": "revamp"
