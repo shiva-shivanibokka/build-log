@@ -76,7 +76,8 @@
     "github": "yes"
   },
   "LLM-Halucination-Detection": {
-    "status": "in-progress"
+    "status": "in-progress",
+    "notes": "I am not happy with this project yet."
   },
   "AutoGrader-Agent": {
     "status": "revamp"
