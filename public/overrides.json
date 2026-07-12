@@ -138,7 +138,7 @@
     "github": "yes"
   },
   "Multimodal-RAG": {
-    "status": "in-progress",
+    "status": "done",
     "github": "yes",
     "notes": "Not happy with this either. Not tested due to LLM constraints. I need a paid LLM key.",
     "whatWhy": "done"
