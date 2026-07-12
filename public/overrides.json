@@ -139,7 +139,9 @@
   },
   "Multimodal-RAG": {
     "status": "in-progress",
-    "github": "yes"
+    "github": "yes",
+    "notes": "Not happy with this either. Not tested due to LLM constraints. I need a paid LLM key.",
+    "whatWhy": "done"
   },
   "Computer-Vision-MLOps-Pipeline": {
     "status": "yet-to-start"
