@@ -155,7 +155,10 @@
     "whatWhy": "done"
   },
   "Computer-Vision-MLOps-Pipeline": {
-    "status": "pending"
+    "status": "pending",
+    "whatWhy": "done",
+    "github": "yes",
+    "notes": "training is done. so we need to deal with the frontend design and deployment."
   },
   "RL-Portfolio-Optimization": {
     "status": "pending",
