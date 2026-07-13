@@ -207,7 +207,7 @@
     "github": "yes"
   },
   "ML-System-Design-Batch-Inference": {
-    "status": "revamp"
+    "status": "pending"
   },
   "ML-System-Design-Feature-Store": {
     "status": "done",
@@ -225,7 +225,7 @@
     "status": "yet-to-start"
   },
   "Autonomous-SWE-Agent": {
-    "status": "in-progress",
+    "status": "pending",
     "notes": "Built it but need to test, and refine frontend."
   },
   "Data-Analytics-Portfolio": {
