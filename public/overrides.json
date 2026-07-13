@@ -231,7 +231,7 @@
     "notes": "Revamped it but still need to test it, and fix the frontend design, need a paid API key for that. look at TODO.md for this."
   },
   "Autonomous-ML-Pipeline-Builder": {
-    "status": "yet-to-start"
+    "status": "pending"
   },
   "Autonomous-SWE-Agent": {
     "status": "pending",
