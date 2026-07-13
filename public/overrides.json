@@ -218,14 +218,15 @@
     "status": "in-progress"
   },
   "Autonomous-Research-Report-Agent": {
-    "status": "in-progress",
+    "status": "pending",
     "notes": "Revamped it but still need to test it, and fix the frontend design, need a paid API key for that. look at TODO.md for this."
   },
   "Autonomous-ML-Pipeline-Builder": {
     "status": "yet-to-start"
   },
   "Autonomous-SWE-Agent": {
-    "status": "in-progress"
+    "status": "in-progress",
+    "notes": "Built it but need to test, and refine frontend."
   },
   "Data-Analytics-Portfolio": {
     "status": "done",
