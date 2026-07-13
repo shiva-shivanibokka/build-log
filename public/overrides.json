@@ -158,7 +158,7 @@
     "status": "pending",
     "whatWhy": "done",
     "github": "yes",
-    "notes": "still need to test, and upgrade the frontend."
+    "notes": "still need to test, and upgrade the frontend. but models have been trained."
   },
   "NLP-Pipeline-at-Scale": {
     "status": "done",
@@ -211,7 +211,7 @@
   },
   "ML-System-Design-Batch-Inference": {
     "status": "pending",
-    "notes": "need to upgrade the frontend and check the entire deployment."
+    "notes": "need to upgrade the frontend and check the entire deployment. revamped and trained it though."
   },
   "ML-System-Design-Feature-Store": {
     "status": "done",
