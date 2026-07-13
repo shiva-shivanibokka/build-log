@@ -123,7 +123,9 @@
   },
   "ML-Model-Efficiency-Toolkit": {
     "status": "pending",
-    "notes": "all models are trained. debugging done. need to refine frontend and do proper deployment."
+    "notes": "all models are trained. debugging done. need to refine frontend and do proper deployment.",
+    "github": "yes",
+    "whatWhy": "done"
   },
   "RecSys-Design": {
     "status": "yet-to-start",
@@ -212,7 +214,9 @@
   },
   "ML-System-Design-Batch-Inference": {
     "status": "pending",
-    "notes": "need to upgrade the frontend and check the entire deployment."
+    "notes": "need to upgrade the frontend and check the entire deployment.",
+    "whatWhy": "done",
+    "github": "yes"
   },
   "ML-System-Design-Feature-Store": {
     "status": "done",
