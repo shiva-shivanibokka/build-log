@@ -163,8 +163,10 @@
     "github": "yes"
   },
   "Federated-Learning-Simulation": {
-    "status": "in-progress",
-    "github": "yes"
+    "status": "pending",
+    "github": "yes",
+    "notes": "i have overhauled it but i still need to test it, look at the frontend and do the finishing touches.",
+    "whatWhy": "done"
   },
   "Transfer-Learning-HuggingFace": {
     "status": "done",
@@ -217,7 +219,7 @@
   },
   "Autonomous-Research-Report-Agent": {
     "status": "in-progress",
-    "notes": "This feels the same as LLM research scraper. check before you even tough it."
+    "notes": "Revamped it but still need to test it, and fix the frontend design, need a paid API key for that."
   },
   "Autonomous-ML-Pipeline-Builder": {
     "status": "yet-to-start"
