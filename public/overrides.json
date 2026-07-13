@@ -155,7 +155,10 @@
     "status": "yet-to-start"
   },
   "RL-Portfolio-Optimization": {
-    "status": "in-progress"
+    "status": "in-progress",
+    "whatWhy": "done",
+    "github": "yes",
+    "notes": "still need to test, and upgrade the frontend."
   },
   "NLP-Pipeline-at-Scale": {
     "status": "done",
